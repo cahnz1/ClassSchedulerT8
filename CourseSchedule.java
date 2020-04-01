@@ -15,6 +15,7 @@ public class CourseSchedule{
       this.courseList = courseList;
       this.roomList = roomList;
       this.timeSlotList = timeSlotList;
+      this.offeringList = offeringList;
     }
 
   public List<Course> getCourseList() {
@@ -57,7 +58,7 @@ public class CourseSchedule{
     this.score = score;
   }
 
-  public Output(String outputFileName) {
-    
+  public void Output(String outputFileName) {
+
   }
 }
