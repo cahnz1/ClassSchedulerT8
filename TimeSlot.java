@@ -23,7 +23,7 @@ public class TimeSlot {
     return days;
   }
 
-  public void setDays(string days) {
+  public void setDays(String days) {
     this.days = days;
   }
 }

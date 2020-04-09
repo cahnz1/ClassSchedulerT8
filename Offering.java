@@ -1,3 +1,4 @@
+import org.optaplanner.core.api.domain.entity.PlanningEntity;
 
 @PlanningEntity
 public class Offering {
@@ -6,7 +7,7 @@ public class Offering {
   private String instructorName;
   private Course course;
   private Room room;
-  private TimeSlot timeslot;
+  private TimeSlot timeSlot;
 
   public Offering(int sectionNumber, String instructorName, Room room,
     Course course, TimeSlot timeSlot) {
@@ -53,7 +54,7 @@ public class Offering {
     return timeSlot;
   }
 
-  public void setTimeSlot(String timeSlot) {
+  public void setTimeSlot(TimeSlot timeSlot) {
     this.timeSlot = timeSlot;
   }
 }

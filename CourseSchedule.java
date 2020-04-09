@@ -1,16 +1,20 @@
+import java.util.List;
+
+import org.optaplanner.core.api.domain.solution.PlanningSolution;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
 @PlanningSolution
 public class CourseSchedule{
 
   private List<Course> courseList;
-  private List<TimeSlot> timeslotList;
+  private List<TimeSlot> timeSlotList;
   private List<Room> roomList;
   private List<Offering> offeringList;
 
   // HardSoftScore class used in Course Scheduler Optaplanner example
   private HardSoftScore score;
 
-  public Offering(List<Course> courseList, List<TimeSlot> timeSlotList,
+  public CourseSchedule(List<Course> courseList, List<TimeSlot> timeSlotList,
   List<Room> roomList, List<Offering> offeringList) {
       this.courseList = courseList;
       this.roomList = roomList;
