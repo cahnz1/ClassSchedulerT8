@@ -1,32 +1,75 @@
 package Parsing;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
+import javax.swing.*;
 import java.util.Map;
 
 public class Tester {
+	static Parser csvParser = new Parser();
+	static List<Map<String, String>> parsedCourseFile;
+	static List<Room> rooms;
+	static List<Course> courses;
+	static List<TimeSlot> times;
+	static List<Offering> offerings;
+	
 
 	public static void main(String[] args) {
 		
-		String roomsFileName = "ClassRoom.csv";
-		String courseFileName = "Spring 2020 Schedule.csv";
+		JFrame frame = new JFrame("Course Scheduler");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setSize(300,300);
+	       
+	    JMenuBar mb = new JMenuBar();
+	    JMenu fm = new JMenu("File");
+	    mb.add(fm);
+	       
+	    JMenuItem open = new JMenuItem("Open...");
+	    JFileChooser fc = new JFileChooser();
+	    open.addActionListener(new ActionListener() {
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	             int rv = fc.showOpenDialog(frame);
+	                
+	             if (rv == JFileChooser.APPROVE_OPTION) {
+	             	File file = fc.getSelectedFile();
+	             	
+	              	// send this file to the parser
+	             	String courseFileName = "Spring 2020 Schedule.csv";
+	             	String roomsFileName = file.getName();
+	             	
+	             	// Print what was parsed
+	        		parseFile(courseFileName, roomsFileName);
+	        		printRooms(rooms);
+	        		csvParser.PrintObjects(parsedCourseFile);
+	        		
+	             }
+	         }
+	    });
+	    fm.add(open); // Adds Button to content pane of frame
+	       
+	    JMenuItem save = new JMenuItem("Save As...");
+	    fm.add(save);
+	       
+	    JButton run = new JButton("Plan Schedule");
+	       
+	    frame.getContentPane().add(BorderLayout.NORTH, mb);
+	    frame.getContentPane().add(run);
+	       
+	    frame.setVisible(true);
 		
-		Parser csvParser = new Parser();
-		List<Map<String, String>> parsedCourseFile = csvParser.ParseCSV(courseFileName);
-		
-		List<Room> rooms = csvParser.GetRoomObjects(roomsFileName);
-		
-		List<Course> courses =  csvParser.GetCourseObjects(parsedCourseFile);
-		
-		List<TimeSlot> times = csvParser.GetTimeSlotObjects(parsedCourseFile);
-		
-		List<Offering> offerings = csvParser.GetOfferingObjects(parsedCourseFile, courses, times);
-		
-		//csvParser.PrintObjects(parsedCourseFile);
-		//printRooms(rooms);
-		//printCourses(courses);
-		//printTimes(times);
-		//printOfferings(offerings);
-		
+	}
+	
+	public static void parseFile(String courseFileName, String roomsFileName) {
+		csvParser = new Parser();
+		parsedCourseFile = csvParser.ParseCSV(courseFileName);
+		rooms = csvParser.GetRoomObjects(roomsFileName);
+		courses =  csvParser.GetCourseObjects(parsedCourseFile);
+		times = csvParser.GetTimeSlotObjects(parsedCourseFile);
+		offerings = csvParser.GetOfferingObjects(parsedCourseFile, courses, times);
 	}
 	
 	public static void printRooms(List<Room> rooms) {
