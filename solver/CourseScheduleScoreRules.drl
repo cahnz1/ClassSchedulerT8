@@ -36,3 +36,15 @@ rule "roomCapacity"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, ($lecture.getRoom().getCapacity() - $lecture.getCapacity()));
 end
+
+// ############################################################################
+// Soft constraints
+// ############################################################################
+
+
+// need to write a constraint that tries to minimize the building's distance from
+// ITE; do this once we have data on the building's distance
+
+
+// need to also write a constraint that deals with course timeslots but need to
+// figure out how to make that work with the project requirements
