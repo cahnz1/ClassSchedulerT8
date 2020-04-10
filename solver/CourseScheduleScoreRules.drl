@@ -1,0 +1,38 @@
+
+
+import classdefs.Course;
+import classdefs.CourseSchedule;
+import classdefs.Offering;
+import classdefs.Room;
+import classdefs.TimeSlot;
+
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+
+global HardSoftScoreHolder scoreHolder;
+
+// ############################################################################
+// Hard constraints
+// ############################################################################
+
+// RoomOccupancy: Two lectures in the same room at the same period.
+// Any extra lecture in the same period and room counts as one more violation.
+rule "roomOccupancy"
+    when
+        Lecture($leftId : id, period != null, $period : period, room != null, $room : room)
+        // $leftLecture has lowest id of the period+room combo
+        not Lecture(period == $period, room == $room, id < $leftId)
+        // rightLecture has the same period
+        Lecture(period == $period, room == $room, id > $leftId, $rightId : id)
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+// RoomCapacity: For each lecture, the number of students that attend the course should be less or equal
+// than the number of seats of all the rooms that host its lectures.
+// Each student above the capacity counts as 1 point of penalty.
+rule "roomCapacity"
+    when
+        $lecture : Lecture(room != null, studentSize > getRoom().getCapacity())
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, ($lecture.getRoom().getCapacity() - $lecture.getCapacity()));
+end

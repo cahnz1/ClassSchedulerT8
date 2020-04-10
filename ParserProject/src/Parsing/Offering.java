@@ -7,6 +7,7 @@ public class Offering {
 	  private Course course;
 	  private Room room;
 	  private TimeSlot timeSlot;
+	  private int capacity;
 
 	  public Offering(int sectionNumber, String instructorName, Room room,
 	    Course course, TimeSlot timeSlot) {
@@ -15,6 +16,7 @@ public class Offering {
 	      this.room = room;
 	      this.course = course;
 	      this.timeSlot = timeSlot;
+	      this.capacity = capacity;
 	    }
 
 	  public int getSectionNumber() {
@@ -55,5 +57,13 @@ public class Offering {
 
 	  public void setTimeSlot(TimeSlot timeSlot) {
 	    this.timeSlot = timeSlot;
+	  }
+	  
+	  public int getCapacity() {
+		return capacity;
+	  }
+	  
+	  public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	  }
 	}
