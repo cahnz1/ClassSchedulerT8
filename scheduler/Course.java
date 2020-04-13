@@ -1,3 +1,5 @@
+package scheduler;
+
 import java.io.Serializable;
 
 //used "implements Serializable" because it was recommended

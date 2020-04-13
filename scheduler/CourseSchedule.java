@@ -1,12 +1,19 @@
+package scheduler;
+
 import java.util.List;
 
+import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
+import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
+import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
+import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
+
 
 @PlanningSolution
 public class CourseSchedule{
 
-  private List<Course> courseList;
+  private List<Course> courseList; //not entirely sure if this list is needed; will remove if not
   private List<TimeSlot> timeSlotList;
   private List<Room> roomList;
   private List<Offering> offeringList;
@@ -22,6 +29,7 @@ public class CourseSchedule{
       this.offeringList = offeringList;
     }
 
+  @ProblemFactCollectionProperty
   public List<Course> getCourseList() {
     return courseList;
   }
@@ -30,6 +38,9 @@ public class CourseSchedule{
     this.courseList = courseList;
   }
 
+
+  @ValueRangeProvider(id = "roomRange")
+  @ProblemFactCollectionProperty
   public List<Room> getRoomList() {
     return roomList;
   }
@@ -38,6 +49,7 @@ public class CourseSchedule{
     this.roomList = roomList;
   }
 
+  @ProblemFactCollectionProperty
   public List<TimeSlot> getTimeSlotList() {
     return timeSlotList;
   }
@@ -46,6 +58,7 @@ public class CourseSchedule{
     this.timeSlotList = timeSlotList;
   }
 
+  @PlanningEntityCollectionProperty
   public List<Offering> getOfferingList() {
     return offeringList;
   }
@@ -54,15 +67,12 @@ public class CourseSchedule{
     this.roomList = roomList;
   }
 
+  @PlanningScore
   public HardSoftScore getScore() {
     return score;
   }
 
   public void setScore(HardSoftScore score) {
     this.score = score;
-  }
-
-  public void Output(String outputFileName) {
-
   }
 }

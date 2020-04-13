@@ -1,3 +1,4 @@
+package scheduler;
 //note: added setters for this class b/c its variables may
 //change throughout but if unneeded we can delete them
 
