@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="ParserProject/src/" kind="src" path=""/>
+	<classpathentry kind="src" path="ParserProject/src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
+=======
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path=""/>
@@ -60,3 +69,4 @@
 	<classpathentry kind="lib" path="Optaplanner/binaries/xstream-1.4.11.1.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
+>>>>>>> refs/remotes/origin/master
