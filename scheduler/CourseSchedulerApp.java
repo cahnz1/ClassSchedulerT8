@@ -15,11 +15,11 @@ public class CourseSchedulerApp {
 	private final String CSV_EXTENSION = ".csv";
 	private CourseSchedule schedule;
 	
-	CourseSchedulerApp(List<Room> rooms, List<Course> courses, List<TimeSlot> times, List<Offering> offerings) {
+	public CourseSchedulerApp(List<Room> rooms, List<Course> courses, List<TimeSlot> times, List<Offering> offerings) {
 		this.schedule = new CourseSchedule(courses, times, rooms, offerings);
 	}
 
-	protected void generateSolution() {
+	public void generateSolution() {
         SolverFactory<CourseSchedule> solverFactory = 
         		SolverFactory.createFromXmlResource("CourseScheduleSolverConfig.xml");
         Solver<CourseSchedule>  solver = solverFactory.buildSolver();

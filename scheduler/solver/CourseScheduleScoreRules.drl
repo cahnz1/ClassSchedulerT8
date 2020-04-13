@@ -18,11 +18,11 @@ global HardSoftScoreHolder scoreHolder;
 // Any extra lecture in the same period and room counts as one more violation.
 rule "roomOccupancy"
     when
-        Lecture($leftId : id, period != null, $period : period, room != null, $room : room)
+        Offering($leftId : id, period != null, $period : period, room != null, $room : room)
         // $leftLecture has lowest id of the period+room combo
-        not Lecture(period == $period, room == $room, id < $leftId)
+        not Offering(period == $period, room == $room, id < $leftId)
         // rightLecture has the same period
-        Lecture(period == $period, room == $room, id > $leftId, $rightId : id)
+        Offering(period == $period, room == $room, id > $leftId, $rightId : id)
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
@@ -32,9 +32,9 @@ end
 // Each student above the capacity counts as 1 point of penalty.
 rule "roomCapacity"
     when
-        $lecture : Lecture(room != null, studentSize > getRoom().getCapacity())
+        $offering : Offering(room != null, capacity > getRoom().getCapacity())
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, ($lecture.getRoom().getCapacity() - $lecture.getCapacity()));
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
 
 // ############################################################################

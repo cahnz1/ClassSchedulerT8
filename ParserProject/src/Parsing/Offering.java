@@ -8,7 +8,8 @@ public class Offering {
 	  private Room room;
 	  private TimeSlot timeSlot;
 	  private int capacity;
-
+	  //might have to add an alternate time slot variable and make a note of 
+	  
 	  public Offering(int sectionNumber, String instructorName, Room room,
 	    Course course, TimeSlot timeSlot) {
 	      this.sectionNumber = sectionNumber;

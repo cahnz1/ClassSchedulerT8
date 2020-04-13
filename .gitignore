@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 /bin/
-=======
 /Course.class
 /CourseSchedule.class
 /Offering.class
@@ -9,4 +7,5 @@
 /TimeSlot.class
 /module-info.class
 /GUI.class
->>>>>>> refs/remotes/origin/master
+/.classpath
+/.project
