@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
   <!-- Define the model -->
-  <solutionClass>classdefs.CourseSchedule</solutionClass>
-  <entityClass>classdefs.Offering</entityClass>
+  <solutionClass>scheduler.CourseSchedule</solutionClass>
+  <entityClass>scheduler.Offering</entityClass>
 
   <!-- Define the score function -->
   <scoreDirectorFactory>
-    <scoreDrl>solver/CourseScheduleScoreRules.drl</scoreDrl>
+	  <easyScoreCalculatorClass>
+		  scheduler.ScoreCalculator
+      </easyScoreCalculatorClass>
+    <!--scoreDrl>solver/CourseScheduleScoreRules.drl</scoreDrl-->
   </scoreDirectorFactory>
 </solver>

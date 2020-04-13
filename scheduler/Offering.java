@@ -41,7 +41,7 @@ public class Offering {
     return instructorName;
   }
 
-  public void setInstructorName(int getInstructorName) {
+  public void setInstructorName(String getInstructorName) {
     this.instructorName = instructorName;
   }
 
@@ -50,7 +50,7 @@ public class Offering {
     return course;
   }
 
-  public void setCourse(String Course) {
+  public void setCourse(Course course) {
     this.course = course;
   }
 
@@ -58,7 +58,7 @@ public class Offering {
     return room;
   }
 
-  public void setRoom(String Room) {
+  public void setRoom(Room room) {
     this.room = room;
   }
 
@@ -85,6 +85,10 @@ public class Offering {
     this.timeSlot = timeSlot;
   }
   
+  public TimeSlot getSuggestedTime() {
+	return suggestedTime;
+  }
+  
   public int getCapacity() {
 	return capacity;
   }
@@ -101,7 +105,7 @@ public class Offering {
 			  instructorName + "," + 
 			  timeSlot.getDays() + "," +
 			  timeSlot.getTime() + "," +
-			  room.getBuilding() + Integer.toString(room.getNumber()) + "/n");
+			  room.getBuilding() + room.getNumber() + "/n");
 	  return newLine;
   }
 }

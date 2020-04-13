@@ -3,10 +3,10 @@ package scheduler;
 public class Room {
 
   private String building;
-  private int number;
+  private String number;
   private int capacity;
 
-  public Room(String building, int number, int capacity) {
+  public Room(String building, String number, int capacity) {
     this.building = building;
     this.number = number;
     this.capacity = capacity;
@@ -20,11 +20,11 @@ public class Room {
     this.building = building;
   }
 
-  public int getNumber() {
+  public String getNumber() {
     return number;
   }
 
-  public void setNumber(int number) {
+  public void setNumber(String number) {
     this.number = number;
   }
 
