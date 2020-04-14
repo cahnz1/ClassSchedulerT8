@@ -57,7 +57,48 @@ public class Offering {
   public Room getRoom() {
     return room;
   }
-
+//--------zippy code---------------
+  public getPriority() {
+	  int priority;
+	  int E = 1;
+	  int IT = 0;
+	  int IL = 7;
+	  int JWS = 3;
+	  int MC = 5;
+	  int SH = 2;
+	  int BS = 6;
+	  int MP = 4;
+	    
+	  this.room.getBuiling();
+	  if("Engineering") {
+	   	priority =  E; 
+	   }
+	  else if("Information Technology") {
+		  priority =  IT;
+	  }
+	  else if("Interdisciplinary Life") {
+		  priority =  IL;
+	    }
+	  else if("Janet & Walter Sondheim") {
+		  priority =  JWS;
+	  }
+	  else if("Meyerhoff Chemistry") {
+		  priority =  MC;
+	  }
+	  else if("Sherman Hall") {
+		  priority =  SH;
+	  }
+	  else if("Biological Sciences") {
+		  priority =  BS;
+	  }
+	  else("Math & Psychology") {
+		  priority =  MP;
+	  }
+	   
+	  return priority;
+  }
+  
+  //------------end Zippy code-------------
   public void setRoom(Room room) {
     this.room = room;
   }

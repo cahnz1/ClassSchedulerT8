@@ -17,6 +17,7 @@ public class CourseSchedule{
   private List<TimeSlot> timeSlotList;
   private List<Room> roomList;
   private List<Offering> offeringList;
+  private List<String> buildingList;
 
   // HardSoftScore class used in Course Scheduler Optaplanner example
   private HardSoftScore score;
@@ -75,4 +76,33 @@ public class CourseSchedule{
   public void setScore(HardSoftScore score) {
     this.score = score;
   }
+  
+  //-----zippy code-------
+  /*public void getBuilding(List<String> buildingList) {
+	    int E = 1;
+	    int IT = ;
+	    int IL = ;
+	    int JWS = ;
+	    
+	  	this.building = buidling;
+	    if("Engineering") {
+	    	building =  
+	    }
+	    else if("Information Technology") {
+	    	
+	    }
+	    else if("Interdisciplinary Life") {
+	    	
+	    }
+	    else if("Janet & Walter Sondheim") {
+	    	
+	    }
+	    
+	  }
+  public void setBuilding(List<String> buildingList) {
+	    this.building = buidling;
+	      
+	  }
+  */
+  //-------end zippy code--------
 }
