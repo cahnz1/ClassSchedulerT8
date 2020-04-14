@@ -68,15 +68,19 @@ public class Offering {
 	  int SH = 2;
 	  int BS = 6;
 	  int MP = 4;
+	  int MP = 8;
 	    
 	  this.room.getBuiling();
 	  if("Engineering") {
 	   	priority =  E; 
 	   }
+	  else if("Public Policy") {
+		   	priority =  PP; 
+	  }
 	  else if("Information Technology") {
 		  priority =  IT;
 	  }
-	  else if("Interdisciplinary Life") {
+	  else if("Interdisciplinary Life S") {
 		  priority =  IL;
 	    }
 	  else if("Janet & Walter Sondheim") {
