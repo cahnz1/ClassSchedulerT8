@@ -26,6 +26,7 @@ public class Tester {
 		CourseSchedulerApp scheduler = new CourseSchedulerApp(rooms, courses, times, offerings);
 		scheduler.generateSolution();
 		scheduler.Output("schedule.csv");
+		System.out.print("finished");
 		
 	}
 	

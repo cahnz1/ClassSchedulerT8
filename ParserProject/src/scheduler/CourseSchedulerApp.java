@@ -21,7 +21,7 @@ public class CourseSchedulerApp {
 
 	public void generateSolution() {
         SolverFactory<CourseSchedule> solverFactory = 
-        		SolverFactory.createFromXmlResource("CourseScheduleSolverConfig.xml");
+        		SolverFactory.createFromXmlResource("scheduler/solver/CourseScheduleSolverConfig.xml");
         Solver<CourseSchedule>  solver = solverFactory.buildSolver();
         CourseSchedule newSchedule = solver.solve(schedule);
         this.schedule = newSchedule;

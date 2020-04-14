@@ -1,5 +1,6 @@
 package scheduler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
@@ -21,6 +22,13 @@ public class CourseSchedule{
   // HardSoftScore class used in Course Scheduler Optaplanner example
   private HardSoftScore score;
 
+  public CourseSchedule() {
+	  this.courseList = new ArrayList<Course>();
+      this.roomList = new ArrayList<Room>();
+      this.timeSlotList = new ArrayList<TimeSlot>();
+      this.offeringList = new ArrayList<Offering>();
+  }
+  
   public CourseSchedule(List<Course> courseList, List<TimeSlot> timeSlotList,
   List<Room> roomList, List<Offering> offeringList) {
       this.courseList = courseList;
@@ -49,6 +57,7 @@ public class CourseSchedule{
     this.roomList = roomList;
   }
 
+  @ValueRangeProvider(id = "timeSlotRange")
   @ProblemFactCollectionProperty
   public List<TimeSlot> getTimeSlotList() {
     return timeSlotList;

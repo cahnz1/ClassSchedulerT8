@@ -19,6 +19,7 @@ public class ScoreCalculator
         // room at the same time
         Set<String> occupiedRooms = new HashSet<>();
         for(Offering offering : courseSchedule.getOfferingList()) {
+        	if (offering.getRoom() != null && offering.getTimeSlot() != null) {
             String roomInUse = offering.getRoom().getBuilding() +
               offering.getRoom().getNumber() +
               offering.getTimeSlot().getDays() +
@@ -28,14 +29,17 @@ public class ScoreCalculator
             } else {
                 occupiedRooms.add(roomInUse);
             }
+        	}
         }
         
         // hard constraint; an offering should not be in a room with
         // less space than the offering's capacity
         for(Offering offering : courseSchedule.getOfferingList()) {
+        	if (offering.getCapacity() != 0 && offering.getRoom() != null && offering.getRoom().getCapacity() != 0) {
             if (offering.getCapacity() > offering.getRoom().getCapacity()) {
             	hardScore += -1; //arbitrary for now but should have higher weight than room one
             }
+        	}
         }
         
         // programming times vs. suggested times in as a soft constraint; may

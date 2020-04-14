@@ -7,6 +7,7 @@ public class TimeSlot {
   private String time;
   private String days;
 
+  public TimeSlot() {}
   public TimeSlot(String time, String days) {
     this.time = time;
     this.days = days;

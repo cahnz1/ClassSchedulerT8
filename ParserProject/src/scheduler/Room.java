@@ -6,6 +6,10 @@ public class Room {
   private String number;
   private int capacity;
 
+  public Room() {
+	  this.capacity = 0;
+  }
+  
   public Room(String building, String number, int capacity) {
     this.building = building;
     this.number = number;

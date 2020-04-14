@@ -6,15 +6,15 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
 
-public class ScoreCalculator 
+public class ScoreCalculator
   implements EasyScoreCalculator<CourseSchedule> {
- 
+
     @Override
     public Score calculateScore(CourseSchedule courseSchedule) {
         int hardScore = 0;
         int softScore = 0;
- 
-        // hard constraint; two classes should not have the same 
+
+        // hard constraint; two classes should not have the same
         // room at the same time
         Set<String> occupiedRooms = new HashSet<>();
         for(Offering offering : courseSchedule.getOfferingList()) {
@@ -28,7 +28,7 @@ public class ScoreCalculator
                 occupiedRooms.add(roomInUse);
             }
         }
-        
+
         // hard constraint; an offering should not be in a room with
         // less space than the offering's capacity
         for(Offering offering : courseSchedule.getOfferingList()) {
@@ -36,7 +36,7 @@ public class ScoreCalculator
             	hardScore += -1; //arbitrary for now but should have higher weight than room one
             }
         }
-        
+
         // programming times vs. suggested times in as a soft constraint; may
         // change to a hard constraint depending on what is said about
         // alternate times
@@ -46,9 +46,9 @@ public class ScoreCalculator
             	softScore += -4; //arbitrary for now but should have higher weight than room one
             }
         }
-        
-        
- 
+
+
+
         return HardSoftScore.of(hardScore, softScore);
     }
 }

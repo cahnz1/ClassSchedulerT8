@@ -19,6 +19,10 @@ public class Offering {
   
   private int capacity;
 
+  public Offering() {
+	  this.capacity = 0;
+  }
+  
   public Offering(int sectionNumber, String instructorName, Room room,
     Course course, TimeSlot timeSlot, int capacity) {
       this.sectionNumber = sectionNumber;
@@ -46,7 +50,6 @@ public class Offering {
     this.instructorName = instructorName;
   }
 
-  @PlanningVariable(valueRangeProviderRefs = {"roomRange"})
   public Course getCourse() {
     return course;
   }
@@ -55,6 +58,7 @@ public class Offering {
     this.course = course;
   }
 
+  @PlanningVariable(valueRangeProviderRefs = {"roomRange"})
   public Room getRoom() {
     return room;
   }
@@ -63,9 +67,9 @@ public class Offering {
     this.room = room;
   }
 
-//made nullable equal to true in order to make it so that a course will
+  //might have to make nullable true in order to make it so that a course will
  // not be scheduled as opposed to being scheduled in a different time slot
- @PlanningVariable(valueRangeProviderRefs = {"timeSlotRange"}, nullable=true)
+ @PlanningVariable(valueRangeProviderRefs = {"timeSlotRange"})
   public TimeSlot getTimeSlot() {
     return timeSlot;
   }
@@ -74,7 +78,9 @@ public class Offering {
   // might want to implement this as a soft constraint instead, and just
   // manually not schedule a class if timeSlot != suggestedTime
   // (in that case, we shouldn't make timeslot nullable)
-  @ValueRangeProvider(id = "timeSlotRange")
+  // not currently using since we have to suggest alternate times anyway
+  // if we want to use, uncomment below line 
+  //@ValueRangeProvider(id = "timeSlotRange")
   public List<TimeSlot> getPossibleTimeSlots() {
 	List<TimeSlot> possibleTimes = new ArrayList<TimeSlot>();
 	possibleTimes.add(suggestedTime);
