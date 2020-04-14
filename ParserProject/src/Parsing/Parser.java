@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import scheduler.Course;
+import scheduler.Offering;
+import scheduler.Room;
+import scheduler.TimeSlot;
+
 public class Parser {
 	
 		private final String CSV_EXTENSION = ".csv";
@@ -119,7 +124,6 @@ public class Parser {
 					timeString = timeString.substring(0,1) + ":" + timeString.substring(2);
 				}
 				
-				
 				boolean duplicate = false;
 				for (TimeSlot t : timeSlots) {
 					if(t.getDays().equals(days) && t.getTime().equals(timeString)) {
@@ -141,6 +145,8 @@ public class Parser {
 			List<Offering> offerings = new ArrayList<Offering>();
 			
 			for (Map<String,String> inputCourse : inputCourses) {
+				
+				int capacity = Integer.parseInt(inputCourse.get("capacity"));
 				
 				int section = Integer.parseInt(inputCourse.get("sec."));
 				String instructorName = inputCourse.get("instructor real name");
@@ -175,7 +181,7 @@ public class Parser {
 				TimeSlot timeSlot = FindTimeSlot(timeObjs, days, timeString);
 				Room room = null;
 				
-				Offering newOffering = new Offering(section, instructorName, room, course, timeSlot);
+				Offering newOffering = new Offering(section, instructorName, room, course, timeSlot, capacity);
 				
 				offerings.add(newOffering);
 				

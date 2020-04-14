@@ -14,6 +14,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import scheduler.Course;
+import scheduler.Offering;
+import scheduler.Room;
+import scheduler.TimeSlot;
+
 
 public class Tester {
 	static Parser csvParser = new Parser();
