@@ -1,5 +1,3 @@
-
-
 import scheduler.Course;
 import scheduler.CourseSchedule;
 import scheduler.Offering;
@@ -18,11 +16,11 @@ global HardSoftScoreHolder scoreHolder;
 // Any extra lecture in the same period and room counts as one more violation.
 rule "roomOccupancy"
     when
-        Offering($leftId : id, period != null, $period : period, room != null, $room : room)
+        Offering(timeSlot != null, $timeSlot : timeSlot, room != null, $room : room)
         // $leftLecture has lowest id of the period+room combo
-        not Offering(period == $period, room == $room, id < $leftId)
+        not Offering(timeSlot == $timeSlot, room == $room)
         // rightLecture has the same period
-        Offering(period == $period, room == $room, id > $leftId, $rightId : id)
+        Offering(timeSlot == $timeSlot, room == $room)
     then
         scoreHolder.addHardConstraintMatch(kcontext, -1);
 end

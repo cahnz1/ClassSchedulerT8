@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
+import scheduler.solver.OfferingDifficultyComparator;
 
 @PlanningEntity(difficultyComparatorClass = OfferingDifficultyComparator.class)
 public class Offering {
@@ -24,7 +25,7 @@ public class Offering {
       this.instructorName = instructorName;
       this.room = room;
       this.course = course;
-      this.timeSlot = time   Slot;
+      this.timeSlot = timeSlot;
       this.capacity = capacity;
       this.suggestedTime = timeSlot;
     }
