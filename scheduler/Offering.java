@@ -6,7 +6,7 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
-@PlanningEntity
+@PlanningEntity(difficultyComparatorClass = OfferingDifficultyComparator.class)
 public class Offering {
 
   private int sectionNumber;
@@ -24,7 +24,7 @@ public class Offering {
       this.instructorName = instructorName;
       this.room = room;
       this.course = course;
-      this.timeSlot = timeSlot;
+      this.timeSlot = time   Slot;
       this.capacity = capacity;
       this.suggestedTime = timeSlot;
     }

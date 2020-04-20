@@ -7,7 +7,9 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
-@PlanningEntity
+import scheduler.solver.OfferingDifficultyComparator;
+
+@PlanningEntity (difficultyComparatorClass = OfferingDifficultyComparator.class)
 public class Offering {
 
   private int sectionNumber;
