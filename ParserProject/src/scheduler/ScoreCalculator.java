@@ -64,12 +64,16 @@ public class ScoreCalculator
         for(Offering offering : courseSchedule.getOfferingList()) {
             if (offering.getTimeSlot().getDays() == offering.getSuggestedTime().getDays()
             		&& offering.getTimeSlot().getTime() == offering.getSuggestedTime().getTime()) {
-            	softScore += -4; //arbitrary for now but should have higher weight than room one
+            	softScore += -20; //arbitrary for now but should have higher weight than room one
             }
         }
         
         //add soft constraint for room distance/priority
-        
+        for(Offering offering : courseSchedule.getOfferingList()) {
+        	if (offering.getRoom() != null) {
+        		softScore -= offering.getPriority(); //subtracts priority of building where offering takes place
+        	}
+        }
  
         return HardSoftScore.of(hardScore, softScore);
     }

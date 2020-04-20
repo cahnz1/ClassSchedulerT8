@@ -66,7 +66,7 @@ public class Offering {
   }
 
   public void setRoom(Room room) {
-    this.room = room;
+	  this.room = room;
   }
 
   //might have to make nullable true in order to make it so that a course will
@@ -105,6 +105,55 @@ public class Offering {
   public void setCapacity(int capacity) {
 	this.capacity = capacity;
   }
+  
+//--------zippy code---------------
+  public int getPriority() {
+	  int E = 1;
+	  int IT = 0;
+	  int IL = 7;
+	  int JWS = 3;
+	  int MC = 5;
+	  int SH = 2;
+	  int BS = 6;
+	  int MP = 4;
+	  int PP = 8;
+	  
+	  int priority = 9; //initialized here so compiler doesn't yell at me
+	  
+	    
+	  if(room.getBuilding() == "Engineering") {
+	   	priority =  E; 
+	   }
+	  else if(room.getBuilding() == "Public Policy") {
+		   	priority =  PP; 
+	  }
+	  else if(room.getBuilding() == "Information Technology") {
+		  priority =  IT;
+	  }
+	  else if(room.getBuilding() == "Interdisciplinary Life S") {
+		  priority =  IL;
+	    }
+	  else if(room.getBuilding() == "Janet & Walter Sondheim") {
+		  priority =  JWS;
+	  }
+	  else if(room.getBuilding() == "Meyerhoff Chemistry") {
+		  priority =  MC;
+	  }
+	  else if(room.getBuilding() == "Sherman Hall") {
+		  priority =  SH;
+	  }
+	  else if(room.getBuilding() == "Biological Sciences") {
+		  priority =  BS;
+	  }
+	  else if (room.getBuilding() == "Math & Psychology") {
+		  priority =  MP;
+	  }
+	  
+	   
+	  return priority;
+  }
+  
+  //------------end Zippy code-------------
   
   public String createLine() {
 	  String newLine = "";
