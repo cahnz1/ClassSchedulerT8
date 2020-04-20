@@ -27,10 +27,8 @@ public class CourseSchedulerApp {
         SolverFactory<CourseSchedule> solverFactory = 
         		SolverFactory.createFromXmlResource("main/resources/courseScheduleSolverConfig.xml", getClass().getClassLoader());
         Solver<CourseSchedule>  solver = solverFactory.buildSolver();
-        System.out.print("solver built");
         CourseSchedule newSchedule = solver.solve(schedule);
         //CourseSchedule newSchedule = solver.getBestSolution();
-        System.out.print("problem solved");
         this.schedule = newSchedule;
     }
 	
@@ -61,12 +59,16 @@ public class CourseSchedulerApp {
 	
 	public void printResults(){
 		
-		ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
-		for(int i=0; i < offerings.size(); i++) {
-			Offering currentOffering = offerings.get(i);
-			String nextLine = currentOffering.createLine();
-			System.out.print(nextLine);
-			System.out.print("\n");
+		//ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
+		for (Offering offering: schedule.getOfferingList()) {
+			System.out.print (offering.getCourse().getCourseTitle() + "," + 
+					  offering.getCourse().getCourseTitle() + "," +
+					  Integer.toString(offering.getSectionNumber()) + "," +
+					  offering.getInstructorName() + "," + 
+					  offering.getTimeSlot().getDays() + "," +
+					  offering.getTimeSlot().getTime() + "," +
+					  offering.getRoom().getBuilding() + "," +
+					  offering.getRoom().getNumber() + "\n");
 		}
 		
 	}
@@ -81,10 +83,16 @@ public class CourseSchedulerApp {
 		
 		FileWriter outputFile = new FileWriter(toWrite); 
 		
-		ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
-		for(int i=0; i < offerings.size(); i++) {
-			Offering currentOffering = offerings.get(i);
-			String nextLine = currentOffering.createLine();
+		//ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
+		for(Offering offering: schedule.getOfferingList()) {
+			String nextLine = offering.getCourse().getCourseTitle() + "," + 
+					  offering.getCourse().getCourseTitle() + "," +
+					  Integer.toString(offering.getSectionNumber()) + "," +
+					  offering.getInstructorName() + "," + 
+					  offering.getTimeSlot().getDays() + "," +
+					  offering.getTimeSlot().getTime() + "," +
+					  offering.getRoom().getBuilding() + "," +
+					  offering.getRoom().getNumber() + "\n";
 			outputFile.write(nextLine);
 		}
 		outputFile.close();

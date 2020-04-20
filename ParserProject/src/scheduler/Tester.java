@@ -22,11 +22,9 @@ public class Tester {
  	
 		// Print what was parsed
 		parseFile(courseFileName, roomsFileName);
-		
 		CourseSchedulerApp scheduler = new CourseSchedulerApp(rooms, courses, times, offerings);
 		scheduler.generateSolution();
 		scheduler.Output("schedule.csv");
-		System.out.print("finished");
 		
 	}
 	

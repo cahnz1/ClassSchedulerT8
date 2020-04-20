@@ -27,6 +27,7 @@ public class ScoreCalculator
         Set<String> occupiedRooms = new HashSet<>();
         for(Offering offering : courseSchedule.getOfferingList()) {
         	if (offering.getRoom() != null && offering.getTimeSlot() != null) {
+        		//System.out.print("enters this statement");
         		String roomInUse = offering.getRoom().getBuilding() +
         				offering.getRoom().getNumber() +
         				offering.getTimeSlot().getDays() +

@@ -23,18 +23,18 @@ public class CourseSchedule {
   private HardSoftScore score;
 
   public CourseSchedule() {
-	  /*this.courseList = new ArrayList<Course>();
+	  this.courseList = new ArrayList<Course>();
       this.roomList = new ArrayList<Room>();
       this.timeSlotList = new ArrayList<TimeSlot>();
-      this.offeringList = new ArrayList<Offering>();*/
+      this.offeringList = new ArrayList<Offering>();
   }
   
   public CourseSchedule(List<Course> courseList, List<TimeSlot> timeSlotList,
   List<Room> roomList, List<Offering> offeringList) {
-      this.courseList = courseList;
-      this.roomList = roomList;
-      this.timeSlotList = timeSlotList;
-      this.offeringList = offeringList;
+      this.courseList = new ArrayList<Course>(courseList);
+      this.roomList = new ArrayList<Room>(roomList);
+      this.timeSlotList = new ArrayList<TimeSlot>(timeSlotList);
+      this.offeringList = new ArrayList<Offering>(offeringList);
     }
 
   @ProblemFactCollectionProperty
@@ -101,7 +101,7 @@ public class CourseSchedule {
 	}
 	System.out.print("Times: \n");
 	for (TimeSlot timeSlot: timeSlotList) {
-		
+		System.out.print(timeSlot.getDays() + timeSlot.getTime() + "\n");
 	}
   }
 }
