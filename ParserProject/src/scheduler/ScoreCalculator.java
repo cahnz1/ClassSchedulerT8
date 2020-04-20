@@ -9,6 +9,13 @@ import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
 
 public class ScoreCalculator 
   implements EasyScoreCalculator<CourseSchedule> {
+	
+	private int myCacheSize = 500; // Default value
+
+    @SuppressWarnings("unused")
+    public void setMyCacheSize(int myCacheSize) {
+        this.myCacheSize = myCacheSize;
+    }
  
     @Override
     public Score calculateScore(CourseSchedule courseSchedule) {
@@ -20,17 +27,25 @@ public class ScoreCalculator
         Set<String> occupiedRooms = new HashSet<>();
         for(Offering offering : courseSchedule.getOfferingList()) {
         	if (offering.getRoom() != null && offering.getTimeSlot() != null) {
-            String roomInUse = offering.getRoom().getBuilding() +
-              offering.getRoom().getNumber() +
-              offering.getTimeSlot().getDays() +
-              offering.getTimeSlot().getTime();
-            if(occupiedRooms.contains(roomInUse)){
-                hardScore += -1;
-            } else {
-                occupiedRooms.add(roomInUse);
-            }
+        		String roomInUse = offering.getRoom().getBuilding() +
+        				offering.getRoom().getNumber() +
+        				offering.getTimeSlot().getDays() +
+        				offering.getTimeSlot().getTime();
+        		if(occupiedRooms.contains(roomInUse)){
+        			hardScore += -1;
+        		} else {
+        			occupiedRooms.add(roomInUse);
+        		}
+        	}
+        	if (offering.getRoom() == null) {
+        		hardScore += -1;
+        	}
+        	if (offering.getTimeSlot() == null){
+        		hardScore += -1;
         	}
         }
+        
+        //should also add hard constraint for rooms to make sure that none of them are null
         
         // hard constraint; an offering should not be in a room with
         // less space than the offering's capacity
@@ -52,6 +67,7 @@ public class ScoreCalculator
             }
         }
         
+        //add soft constraint for room distance/priority
         
  
         return HardSoftScore.of(hardScore, softScore);

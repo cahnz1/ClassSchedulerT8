@@ -6,42 +6,45 @@
 
   <!-- Define the score function -->
   <scoreDirectorFactory>
-  	<EasyScoreCalculator>scheduler.ScoreCalculator</EasyScoreCalculator>
+  	<easyScoreCalculatorClass>scheduler.ScoreCalculator</easyScoreCalculatorClass>
+  	<easyScoreCalculatorCustomProperties>
+      <myCacheSize>1000</myCacheSize>
+    </easyScoreCalculatorCustomProperties>
   </scoreDirectorFactory>
   
   <!-- Add optimization algorithms -->
-  <termination>
-    <minutesSpentLimit>10</minutesSpentLimit>
-  </termination>
+  <!--  <termination>
+    <minutesSpentLimit>3</minutesSpentLimit>
+  </termination>-->
   
   <constructionHeuristic>
     <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
   </constructionHeuristic>
   
-  <localSearch>
+  <!--  <localSearch>
     <unionMoveSelector>
       <changeMoveSelector/>
       <swapMoveSelector>
         <filterClass>scheduler.solver.DifferentCourseSwapMoveFilter</filterClass>
       </swapMoveSelector>
-    </unionMoveSelector>
+    </unionMoveSelector>-->
     <!--<acceptor>-->
       <!--<entityTabuSize>9</entityTabuSize>-->
     <!--</acceptor>-->
     <!--<forager>-->
       <!--<acceptedCountLimit>900</acceptedCountLimit>-->
     <!--</forager>-->
-    <acceptor>
+    <!-- <acceptor>
       <lateAcceptanceSize>600</lateAcceptanceSize>
     </acceptor>
     <forager>
       <acceptedCountLimit>4</acceptedCountLimit>
-    </forager>
+    </forager>-->
     <!--<acceptor>-->
       <!--<stepCountingHillClimbingSize>200</stepCountingHillClimbingSize>-->
     <!--</acceptor>-->
     <!--<forager>-->
       <!--<acceptedCountLimit>1</acceptedCountLimit>-->
     <!--</forager>-->
-  </localSearch>
+  <!--  </localSearch> -->
 </solver>

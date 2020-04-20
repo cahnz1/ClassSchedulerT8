@@ -12,7 +12,7 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
 
 @PlanningSolution
-public class CourseSchedule{
+public class CourseSchedule { 
 
   private List<Course> courseList; //not entirely sure if this list is needed; will remove if not
   private List<TimeSlot> timeSlotList;
@@ -23,10 +23,10 @@ public class CourseSchedule{
   private HardSoftScore score;
 
   public CourseSchedule() {
-	  this.courseList = new ArrayList<Course>();
+	  /*this.courseList = new ArrayList<Course>();
       this.roomList = new ArrayList<Room>();
       this.timeSlotList = new ArrayList<TimeSlot>();
-      this.offeringList = new ArrayList<Offering>();
+      this.offeringList = new ArrayList<Offering>();*/
   }
   
   public CourseSchedule(List<Course> courseList, List<TimeSlot> timeSlotList,
@@ -72,8 +72,8 @@ public class CourseSchedule{
     return offeringList;
   }
 
-  public void setOfferingList(List<Room> roomList) {
-    this.roomList = roomList;
+  public void setOfferingList(List<Offering> offeringList) {
+    this.offeringList = offeringList;
   }
 
   @PlanningScore
@@ -83,5 +83,25 @@ public class CourseSchedule{
 
   public void setScore(HardSoftScore score) {
     this.score = score;
+  }
+  
+  // testing function; prints all the offerings and their assigned times,
+  // as well as the available rooms and their capacities
+  public void printElements() {
+	System.out.print("Offerings: \n");
+	for (Offering offering : offeringList) {
+		System.out.print(offering.getCourse().getCourseCode() + ": "
+				+ offering.getTimeSlot().getDays() + offering.getTimeSlot().getTime() 
+				+ "- " + offering.getCapacity() + "\n");
+		
+	}
+	System.out.print("Rooms: \n");
+	for (Room room: roomList) {
+		System.out.print(room.getBuilding() + room.getNumber() + ": " + room.getCapacity() + "\n");
+	}
+	System.out.print("Times: \n");
+	for (TimeSlot timeSlot: timeSlotList) {
+		
+	}
   }
 }

@@ -60,7 +60,7 @@ public class Offering {
     this.course = course;
   }
 
-  @PlanningVariable(valueRangeProviderRefs = {"roomRange"})
+  @PlanningVariable(valueRangeProviderRefs = {"roomRange"}, nullable=false)
   public Room getRoom() {
     return room;
   }
@@ -71,7 +71,7 @@ public class Offering {
 
   //might have to make nullable true in order to make it so that a course will
  // not be scheduled as opposed to being scheduled in a different time slot
- @PlanningVariable(valueRangeProviderRefs = {"timeSlotRange"})
+  @PlanningVariable(valueRangeProviderRefs = {"timeSlotRange"}, nullable=false)
   public TimeSlot getTimeSlot() {
     return timeSlot;
   }

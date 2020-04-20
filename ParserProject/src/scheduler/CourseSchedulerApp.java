@@ -18,6 +18,10 @@ public class CourseSchedulerApp {
 	public CourseSchedulerApp(List<Room> rooms, List<Course> courses, List<TimeSlot> times, List<Offering> offerings) {
 		this.schedule = new CourseSchedule(courses, times, rooms, offerings);
 	}
+	
+	public CourseSchedule getSchedule() {
+		return schedule;
+	}
 
 	public void generateSolution() {
         SolverFactory<CourseSchedule> solverFactory = 
@@ -25,6 +29,7 @@ public class CourseSchedulerApp {
         Solver<CourseSchedule>  solver = solverFactory.buildSolver();
         System.out.print("solver built");
         CourseSchedule newSchedule = solver.solve(schedule);
+        //CourseSchedule newSchedule = solver.getBestSolution();
         System.out.print("problem solved");
         this.schedule = newSchedule;
     }
@@ -52,6 +57,18 @@ public class CourseSchedulerApp {
 			return false;
 		}
 		return true;
+	}
+	
+	public void printResults(){
+		
+		ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
+		for(int i=0; i < offerings.size(); i++) {
+			Offering currentOffering = offerings.get(i);
+			String nextLine = currentOffering.createLine();
+			System.out.print(nextLine);
+			System.out.print("\n");
+		}
+		
 	}
 	
 	public void Output(String fileName) throws IOException {
