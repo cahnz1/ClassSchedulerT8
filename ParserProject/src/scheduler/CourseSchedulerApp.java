@@ -28,7 +28,6 @@ public class CourseSchedulerApp {
         		SolverFactory.createFromXmlResource("main/resources/courseScheduleSolverConfig.xml", getClass().getClassLoader());
         Solver<CourseSchedule>  solver = solverFactory.buildSolver();
         CourseSchedule newSchedule = solver.solve(schedule);
-        //CourseSchedule newSchedule = solver.getBestSolution();
         this.schedule = newSchedule;
     }
 	
@@ -82,15 +81,18 @@ public class CourseSchedulerApp {
 		
 		FileWriter outputFile = new FileWriter(toWrite); 
 		
-		outputFile.write("Name,Section,Instructor,Day,Time,Building,Room Number\n");
+		outputFile.write("Subject,Course #,Course Title,Sec.,Instructor Real Name,Time,Capacity, Building, Room Number\n");
 		for(Offering offering: schedule.getOfferingList()) {
-			String nextLine = offering.getCourse().getCourseTitle() + "," +
-					  Integer.toString(offering.getSectionNumber()) + "," + "'" + 
-					  offering.getInstructorName() + "'" + "," + 
-					  offering.getTimeSlot().getDays() + "," +
-					  offering.getTimeSlot().getTime() + "," +
-					  offering.getRoom().getBuilding() + "," +
-					  offering.getRoom().getNumber() + "\n";
+			String[] courseCodeInfo = offering.getCourse().getCourseCode().split("\\s+");
+			String nextLine = courseCodeInfo[0] + "," 
+					+ courseCodeInfo[1] + "," +
+					offering.getCourse().getCourseTitle() + "," +
+					Integer.toString(offering.getSectionNumber()) + "," + "'" + 
+					offering.getInstructorName() + "'" + "," + 
+					offering.getTimeSlot().getDays() + offering.getTimeSlot().getTime() + "," +
+					Integer.toString(offering.getCapacity()) + "," +
+					offering.getRoom().getBuilding() + "," +
+					offering.getRoom().getNumber() + "\n";
 			outputFile.write(nextLine);
 		}
 		outputFile.close();

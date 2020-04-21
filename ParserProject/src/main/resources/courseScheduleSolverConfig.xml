@@ -17,5 +17,5 @@
   <!-- Add optimization algorithms -->
   <constructionHeuristic>
     <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
-  </constructionHeuristic>
+  </constructionHeuristic> 
 </solver>
