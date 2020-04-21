@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.optaplanner.core.api.score.Score;
-import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
+import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
 
 public class ScoreCalculator 
@@ -20,6 +20,7 @@ public class ScoreCalculator
     @Override
     public Score calculateScore(CourseSchedule courseSchedule) {
         int hardScore = 0;
+        int mediumScore = 0;
         int softScore = 0;
  
         // hard constraint; two classes should not have the same 
@@ -44,29 +45,27 @@ public class ScoreCalculator
         	if (offering.getTimeSlot() == null){
         		hardScore += -1;
         	}
-        }
-        
-        //should also add hard constraint for rooms to make sure that none of them are null
+        }        
         
         // hard constraint; an offering should not be in a room with
         // less space than the offering's capacity
         for(Offering offering : courseSchedule.getOfferingList()) {
         	if (offering.getCapacity() != 0 && offering.getRoom() != null && offering.getRoom().getCapacity() != 0) {
-            if (offering.getCapacity() > offering.getRoom().getCapacity()) {
-            	hardScore += -1; //arbitrary for now but should have higher weight than room one
-            }
+        		if (offering.getCapacity() > offering.getRoom().getCapacity()) {
+        			hardScore += -1; //arbitrary for now but should have higher weight than room one
+        		}
         	}
         }
         
-        // programming times vs. suggested times in as a soft constraint; may
-        // change to a hard constraint depending on what is said about
-        // alternate times
+        // medium constraint; unless it cannot be avoided, an offering's time
+        // should not differ from its suggested time
         for(Offering offering : courseSchedule.getOfferingList()) {
-            if (offering.getTimeSlot().getDays() == offering.getSuggestedTime().getDays()
-            		&& offering.getTimeSlot().getTime() == offering.getSuggestedTime().getTime()) {
-            	softScore += -20; //arbitrary for now but should have higher weight than room one
-            }
+        	if(offering.getTimeSlot().getDays() != offering.getSuggestedTime().getDays() || 
+        			offering.getTimeSlot().getTime() != offering.getSuggestedTime().getTime()) {
+        		mediumScore -= 1;
+        	}
         }
+        
         
         //add soft constraint for room distance/priority
         for(Offering offering : courseSchedule.getOfferingList()) {
@@ -75,6 +74,6 @@ public class ScoreCalculator
         	}
         }
  
-        return HardSoftScore.of(hardScore, softScore);
+        return HardMediumSoftScore.of(hardScore, mediumScore, softScore);
     }
 }

@@ -8,7 +8,7 @@ import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
-import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
+import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 
 
 @PlanningSolution
@@ -20,7 +20,7 @@ public class CourseSchedule {
   private List<Offering> offeringList;
 
   // HardSoftScore class used in Course Scheduler Optaplanner example
-  private HardSoftScore score;
+  private HardMediumSoftScore score;
 
   public CourseSchedule() {
 	  this.courseList = new ArrayList<Course>();
@@ -77,11 +77,11 @@ public class CourseSchedule {
   }
 
   @PlanningScore
-  public HardSoftScore getScore() {
+  public HardMediumSoftScore getScore() {
     return score;
   }
 
-  public void setScore(HardSoftScore score) {
+  public void setScore(HardMediumSoftScore score) {
     this.score = score;
   }
   
