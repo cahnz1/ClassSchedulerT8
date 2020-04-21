@@ -23,13 +23,13 @@
     <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
   </constructionHeuristic>
   
-  <!--  <localSearch>
+  <localSearch>
     <unionMoveSelector>
       <changeMoveSelector/>
       <swapMoveSelector>
         <filterClass>scheduler.solver.DifferentCourseSwapMoveFilter</filterClass>
       </swapMoveSelector>
-    </unionMoveSelector>-->
+    </unionMoveSelector>
     <!--<acceptor>-->
       <!--<entityTabuSize>9</entityTabuSize>-->
     <!--</acceptor>-->
@@ -48,5 +48,5 @@
     <!--<forager>-->
       <!--<acceptedCountLimit>1</acceptedCountLimit>-->
     <!--</forager>-->
-  <!--  </localSearch> -->
+  </localSearch>
 </solver>

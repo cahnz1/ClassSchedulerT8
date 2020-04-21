@@ -15,38 +15,16 @@
   <environmentMode>FAST_ASSERT</environmentMode>
   
   <!-- Add optimization algorithms -->
-  <!--  <termination>
-    <minutesSpentLimit>3</minutesSpentLimit>
-  </termination>-->
-  
   <constructionHeuristic>
     <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
   </constructionHeuristic>
   
-  <!--  <localSearch>
+  <localSearch>
     <unionMoveSelector>
       <changeMoveSelector/>
       <swapMoveSelector>
         <filterClass>scheduler.solver.DifferentCourseSwapMoveFilter</filterClass>
       </swapMoveSelector>
-    </unionMoveSelector>-->
-    <!--<acceptor>-->
-      <!--<entityTabuSize>9</entityTabuSize>-->
-    <!--</acceptor>-->
-    <!--<forager>-->
-      <!--<acceptedCountLimit>900</acceptedCountLimit>-->
-    <!--</forager>-->
-    <!-- <acceptor>
-      <lateAcceptanceSize>600</lateAcceptanceSize>
-    </acceptor>
-    <forager>
-      <acceptedCountLimit>4</acceptedCountLimit>
-    </forager>-->
-    <!--<acceptor>-->
-      <!--<stepCountingHillClimbingSize>200</stepCountingHillClimbingSize>-->
-    <!--</acceptor>-->
-    <!--<forager>-->
-      <!--<acceptedCountLimit>1</acceptedCountLimit>-->
-    <!--</forager>-->
-  <!--  </localSearch> -->
+    </unionMoveSelector>
+  </localSearch>
 </solver>
