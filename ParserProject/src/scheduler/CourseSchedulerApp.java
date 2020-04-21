@@ -59,7 +59,6 @@ public class CourseSchedulerApp {
 	
 	public void printResults(){
 		
-		//ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
 		for (Offering offering: schedule.getOfferingList()) {
 			System.out.print (offering.getCourse().getCourseTitle() + "," + 
 					  offering.getCourse().getCourseTitle() + "," +
@@ -83,8 +82,7 @@ public class CourseSchedulerApp {
 		
 		FileWriter outputFile = new FileWriter(toWrite); 
 		
-		//ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
-		outputFile.write("Name,Instructor,Day,Time,Building,Room Number");
+		outputFile.write("Name,Section,Instructor,Day,Time,Building,Room Number\n");
 		for(Offering offering: schedule.getOfferingList()) {
 			String nextLine = offering.getCourse().getCourseTitle() + "," +
 					  Integer.toString(offering.getSectionNumber()) + "," + "'" + 
