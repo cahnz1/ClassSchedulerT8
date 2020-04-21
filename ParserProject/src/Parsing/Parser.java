@@ -105,7 +105,7 @@ public class Parser {
 				String timeString = inputTimeSlot.get("time").toLowerCase();
 				String days = "";
 							
-				if(timeString.contains("wmf")) {
+				if(timeString.contains("mwf")) {
 					days = "mwf";
 				}else if(timeString.contains("tt")) {
 					days = "tt";
@@ -159,7 +159,7 @@ public class Parser {
 				String timeString = inputCourse.get("time").toLowerCase();
 				String days = "";
 							
-				if(timeString.contains("wmf")) {
+				if(timeString.contains("mwf")) {
 					days = "mwf";
 				}else if(timeString.contains("tt")) {
 					days = "tt";

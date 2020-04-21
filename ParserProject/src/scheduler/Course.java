@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 //used "implements Serializable" because it was recommended
 //by OptaPlanner for problem facts (things that don't change
-//during probloem solving)
+//during problem solving)
 public class Course implements Serializable {
 
   private String courseCode;

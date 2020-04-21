@@ -18,13 +18,4 @@
   <constructionHeuristic>
     <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
   </constructionHeuristic>
-  
-  <localSearch>
-    <unionMoveSelector>
-      <changeMoveSelector/>
-      <swapMoveSelector>
-        <filterClass>scheduler.solver.DifferentCourseSwapMoveFilter</filterClass>
-      </swapMoveSelector>
-    </unionMoveSelector>
-  </localSearch>
 </solver>

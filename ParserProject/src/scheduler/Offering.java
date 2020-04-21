@@ -31,9 +31,9 @@ public class Offering {
       this.instructorName = instructorName;
       this.room = room;
       this.course = course;
-      this.timeSlot = timeSlot;
       this.capacity = capacity;
       this.suggestedTime = timeSlot;
+      this.timeSlot = null;
     }
 
   public int getSectionNumber() {
@@ -48,7 +48,7 @@ public class Offering {
     return instructorName;
   }
 
-  public void setInstructorName(String getInstructorName) {
+  public void setInstructorName(String instructorName) {
     this.instructorName = instructorName;
   }
 
@@ -69,8 +69,7 @@ public class Offering {
 	  this.room = room;
   }
 
-  //might have to make nullable true in order to make it so that a course will
- // not be scheduled as opposed to being scheduled in a different time slot
+  
   @PlanningVariable(valueRangeProviderRefs = {"timeSlotRange"}, nullable=false)
   public TimeSlot getTimeSlot() {
     return timeSlot;

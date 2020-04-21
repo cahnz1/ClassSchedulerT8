@@ -39,12 +39,6 @@ public class ScoreCalculator
         			occupiedRooms.add(roomInUse);
         		}
         	}
-        	if (offering.getRoom() == null) {
-        		hardScore += -1;
-        	}
-        	if (offering.getTimeSlot() == null){
-        		hardScore += -1;
-        	}
         }        
         
         // hard constraint; an offering should not be in a room with
@@ -57,17 +51,41 @@ public class ScoreCalculator
         	}
         }
         
+        
+        // hard constraint: an instructor should not be teaching two
+        // classes at the same time
+        Set<String> instructorTimes = new HashSet<>();
+        for(Offering offering : courseSchedule.getOfferingList()) {
+        	if (offering.getTimeSlot() != null) {
+        		String instructorTimeSlot = offering.getInstructorName() +
+    				offering.getTimeSlot().getDays() +
+    				offering.getTimeSlot().getTime();
+        	
+        		if (offering.getInstructorName().compareTo("Staff") != 0) { //if instructor is not Staff
+        			if (instructorTimes.contains(instructorTimeSlot)) {
+        				hardScore += -1;
+        			}
+        			else {
+        				instructorTimes.add(instructorTimeSlot);
+        			}
+        		}
+        	}
+        }
+        
         // medium constraint; unless it cannot be avoided, an offering's time
         // should not differ from its suggested time
         for(Offering offering : courseSchedule.getOfferingList()) {
-        	if(offering.getTimeSlot().getDays() != offering.getSuggestedTime().getDays() || 
-        			offering.getTimeSlot().getTime() != offering.getSuggestedTime().getTime()) {
-        		mediumScore -= 1;
+        	if (offering.getTimeSlot() != null) {
+        		if(offering.getTimeSlot().getDays() != offering.getSuggestedTime().getDays() || 
+        				offering.getTimeSlot().getTime() != offering.getSuggestedTime().getTime()) {
+        			mediumScore -= 1;
+        		}
         	}
         }
         
         
-        //add soft constraint for room distance/priority
+        // soft constraint: the class should ideally be located in a building
+        // closer to ITE (location of the professor's office hours)
         for(Offering offering : courseSchedule.getOfferingList()) {
         	if (offering.getRoom() != null) {
         		softScore -= offering.getPriority(); //subtracts priority of building where offering takes place

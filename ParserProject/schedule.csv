@@ -16,7 +16,7 @@ Discrete Structures,3,'Yesha, Yaacov',tt,10:00,Information Technology,227
 Discrete Structures,4,'Yesha, Yaacov',tt,1:30,Information Technology,227
 Discrete Structures,5,'Joeg, Prasanna',mw,1:00,Meyerhoff Chemistry,030
 Discrete Structures,6,'Joeg, Prasanna',mw,2:30,Engineering,122, 122A
-Continued Computer Science for Non-Majors,1,'Staff',mw,10:00,Interdisciplinary Life S,237
+Continued Computer Science for Non-Majors,1,'Staff',mw,10:00,Engineering,122, 122A
 Social & Ethical Issues in IT,1,'Staff',tt,5:30,Janet & Walter Sondheim,109
 Social & Ethical Issues in IT,2,'Staff',tt,7:10,Information Technology,227
 Social & Ethical Issues in IT,3,'Staff',mw,5:30,Meyerhoff Chemistry,030
@@ -31,7 +31,7 @@ Programming Languages,1,'Donyaee, Kash',tt,10:00,Interdisciplinary Life S,237
 Programming Languages,2,'Vafaei, Fereydoon',tt,1:00,Information Technology,227
 Programming Languages,3,'Donyaee, Kash',mw,1:00,Biological Sciences,120
 Programming Languages,4,'Vafaei, Fereydoon',tt,4:00,Sherman Hall,014
-Data Structures,1,'Marron, Christopher',mw,10:00,Engineering,122, 122A
+Data Structures,1,'Marron, Christopher',mw,10:00,Public Policy,105
 Data Structures,2,'Wilson, Marcella',tt,1:00,Interdisciplinary Life S,237
 Data Structures,3,'Wilson, Marcella',tt,2:30,Interdisciplinary Life S,237
 Data Structures,4,'Johnson, Benjamin',mw,1:00,Interdisciplinary Life S,233
@@ -49,7 +49,7 @@ Computer Security,3,'Staff',tt,4:00,Biological Sciences,120
 Computer Graphics,1,'Olano, Marc',mw,1:00,Information Technology,227
 Algorithms,1,'Chang, Richard',tt,1:00,Meyerhoff Chemistry,030
 Algorithms,2,'Chang, Richard',tt,10:00,Janet & Walter Sondheim,109
-Algorithms,3,'Marron, Christopher',mw,10:00,Information Technology,227
+Algorithms,3,'Marron, Christopher',mw,7:10,Engineering,122, 122A
 Cryptography and Data Security,1,'Zhang, Haibin',tt,10:00,Engineering,122, 122A
 Software Engineering I,1,'Dutt, Abhijit',mw,1:00,Sherman Hall,013
 Software Engineering I,2,'Dutt, Abhijit',mw,2:30,Biological Sciences,120
@@ -74,7 +74,7 @@ Spec Topic: Data Science,1,'Dutt, Abhijit',mw,4:00,Meyerhoff Chemistry,030
 Games Capstone,1,'staff',tt,1:00,Public Policy,105
 Computer Architecture,1,'Liu, Chenchen',tt,4:00,Janet & Walter Sondheim,109
 Operating Systems,1,'Kalpakis, Kostas',tt,1:00,Engineering,122, 122A
-Algorithms,1,'Sherman, Alan',mw,10:00,Public Policy,105
+Algorithms,1,'Sherman, Alan',mwf,10:00,Public Policy,105
 Machine Learning,1,'Oates, Tim',tt,2:30,Information Technology,227
 Network Technologies,1,'Sidhu, Deepinder',tt,5:30,Information Technology,227
 Wireless Sensor Networks,1,'Younis, Mohamed',mw,2:30,Sherman Hall,014
