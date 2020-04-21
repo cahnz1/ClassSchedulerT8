@@ -84,11 +84,11 @@ public class CourseSchedulerApp {
 		FileWriter outputFile = new FileWriter(toWrite); 
 		
 		//ArrayList<Offering> offerings = new ArrayList<Offering>(schedule.getOfferingList());
+		outputFile.write("Name,Instructor,Day,Time,Building,Room Number");
 		for(Offering offering: schedule.getOfferingList()) {
-			String nextLine = offering.getCourse().getCourseTitle() + "," + 
-					  offering.getCourse().getCourseTitle() + "," +
-					  Integer.toString(offering.getSectionNumber()) + "," +
-					  offering.getInstructorName() + "," + 
+			String nextLine = offering.getCourse().getCourseTitle() + "," +
+					  Integer.toString(offering.getSectionNumber()) + "," + "'" + 
+					  offering.getInstructorName() + "'" + "," + 
 					  offering.getTimeSlot().getDays() + "," +
 					  offering.getTimeSlot().getTime() + "," +
 					  offering.getRoom().getBuilding() + "," +
