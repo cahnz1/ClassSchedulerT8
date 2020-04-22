@@ -3,6 +3,9 @@ package scheduler;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
@@ -106,6 +109,13 @@ public class Offering {
   }
   
 //--------zippy code---------------
+  
+  public void ErrorMsg() {
+      String message = "there is no building with this name";
+      JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+          JOptionPane.ERROR_MESSAGE);
+    }
+  
   public int getPriority() {
 	  int E = 1;
 	  int IT = 0;
@@ -120,34 +130,39 @@ public class Offering {
 	  int priority = 9; //initialized here so compiler doesn't yell at me
 	  
 	    
-	  if(room.getBuilding() == "Engineering") {
+	  if(room.getBuilding().compareTo("Engineering") == 0) {
 	   	priority =  E; 
 	   }
-	  else if(room.getBuilding() == "Public Policy") {
+	  else if(room.getBuilding().compareTo("Public Policy") == 0) {
 		   	priority =  PP; 
 	  }
-	  else if(room.getBuilding() == "Information Technology") {
+	  else if(room.getBuilding().compareTo("Information Technology") == 0) {
 		  priority =  IT;
 	  }
-	  else if(room.getBuilding() == "Interdisciplinary Life S") {
+	  else if(room.getBuilding().compareTo("Interdisciplinary Life S") == 0) {
 		  priority =  IL;
 	    }
-	  else if(room.getBuilding() == "Janet & Walter Sondheim") {
+	  else if(room.getBuilding().compareTo("Janet & Walter Sondheim") == 0) {
 		  priority =  JWS;
 	  }
-	  else if(room.getBuilding() == "Meyerhoff Chemistry") {
+	  else if(room.getBuilding().compareTo("Meyerhoff Chemistry") == 0) {
 		  priority =  MC;
 	  }
-	  else if(room.getBuilding() == "Sherman Hall") {
+	  else if(room.getBuilding().compareTo("Sherman Hall") == 0) {
 		  priority =  SH;
 	  }
-	  else if(room.getBuilding() == "Biological Sciences") {
+	  else if(room.getBuilding().compareTo("Biological Sciences") == 0) {
 		  priority =  BS;
 	  }
-	  else if (room.getBuilding() == "Math & Psychology") {
+	  else if (room.getBuilding().compareTo("Math & Psychology") == 0) {
 		  priority =  MP;
 	  }
 	  
+	  else {
+		  //there is no building
+		  System.out.print("there is no building with this name");
+		  ErrorMsg();
+	  }
 	   
 	  return priority;
   }

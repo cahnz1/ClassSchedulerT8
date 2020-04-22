@@ -75,7 +75,7 @@ public class ScoreCalculator
         // medium constraint; unless it cannot be avoided, an offering's time
         // should not differ from its suggested time
         for(Offering offering : courseSchedule.getOfferingList()) {
-        	if (offering.getTimeSlot() != null) {
+        	if (offering.getTimeSlot() != null && offering.getSuggestedTime() != null) {
         		if(offering.getTimeSlot().getDays() != offering.getSuggestedTime().getDays() || 
         				offering.getTimeSlot().getTime() != offering.getSuggestedTime().getTime()) {
         			mediumScore -= 1;

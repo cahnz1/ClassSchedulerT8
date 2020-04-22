@@ -121,7 +121,7 @@ public class Parser {
 				}else if(timeString.length() == 3) {
 					timeString = timeString.charAt(0) + ":" + timeString.substring(1);
 				}else if(timeString.length() == 4) {
-					timeString = timeString.substring(0,1) + ":" + timeString.substring(2);
+					timeString = timeString.substring(0,2) + ":" + timeString.substring(2);
 				}
 				
 				boolean duplicate = false;
