@@ -7,6 +7,11 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import scheduler.solver.OfferingDifficultyComparator;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
+
 @PlanningEntity(difficultyComparatorClass = OfferingDifficultyComparator.class)
 public class Offering {
 
@@ -59,6 +64,17 @@ public class Offering {
     return room;
   }
 //--------zippy code---------------
+  
+  
+
+  public ErrorMsg() {
+      String message = "there is no building with this name";
+      JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+          JOptionPane.ERROR_MESSAGE);
+    }
+  
+ 
+  
   public getPriority() {
 	  int priority;
 	  int E = 1;
@@ -96,8 +112,13 @@ public class Offering {
 	  else if("Biological Sciences") {
 		  priority =  BS;
 	  }
-	  else("Math & Psychology") {
+	  else if("Math & Psychology") {
 		  priority =  MP;
+	  }
+	  else {
+		  //there is no building
+		  System.out.print("there is no building with this name");
+		  ErrorMsg();
 	  }
 	   
 	  return priority;
