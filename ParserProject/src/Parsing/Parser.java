@@ -2,11 +2,16 @@ package Parsing;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+
+import scheduler.Course;
+import scheduler.Offering;
+import scheduler.Room;
+import scheduler.TimeSlot;
 
 public class Parser {
 	
@@ -100,7 +105,7 @@ public class Parser {
 				String timeString = inputTimeSlot.get("time").toLowerCase();
 				String days = "";
 							
-				if(timeString.contains("wmf")) {
+				if(timeString.contains("mwf")) {
 					days = "mwf";
 				}else if(timeString.contains("tt")) {
 					days = "tt";
@@ -116,9 +121,8 @@ public class Parser {
 				}else if(timeString.length() == 3) {
 					timeString = timeString.charAt(0) + ":" + timeString.substring(1);
 				}else if(timeString.length() == 4) {
-					timeString = timeString.substring(0,1) + ":" + timeString.substring(2);
+					timeString = timeString.substring(0,2) + ":" + timeString.substring(2);
 				}
-				
 				
 				boolean duplicate = false;
 				for (TimeSlot t : timeSlots) {
@@ -142,6 +146,8 @@ public class Parser {
 			
 			for (Map<String,String> inputCourse : inputCourses) {
 				
+				int capacity = Integer.parseInt(inputCourse.get("capacity"));
+				
 				int section = Integer.parseInt(inputCourse.get("sec."));
 				String instructorName = inputCourse.get("instructor real name");
 				
@@ -153,7 +159,7 @@ public class Parser {
 				String timeString = inputCourse.get("time").toLowerCase();
 				String days = "";
 							
-				if(timeString.contains("wmf")) {
+				if(timeString.contains("mwf")) {
 					days = "mwf";
 				}else if(timeString.contains("tt")) {
 					days = "tt";
@@ -175,7 +181,7 @@ public class Parser {
 				TimeSlot timeSlot = FindTimeSlot(timeObjs, days, timeString);
 				Room room = null;
 				
-				Offering newOffering = new Offering(section, instructorName, room, course, timeSlot);
+				Offering newOffering = new Offering(section, instructorName, room, course, timeSlot, capacity);
 				
 				offerings.add(newOffering);
 				

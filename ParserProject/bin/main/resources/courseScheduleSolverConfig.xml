@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+  <!-- Define the model -->
+  <solutionClass>scheduler.CourseSchedule</solutionClass>
+  <entityClass>scheduler.Offering</entityClass>
+
+  <!-- Define the score function -->
+  <scoreDirectorFactory>
+  	<easyScoreCalculatorClass>scheduler.ScoreCalculator</easyScoreCalculatorClass>
+  	<easyScoreCalculatorCustomProperties>
+      <myCacheSize>1000</myCacheSize>
+    </easyScoreCalculatorCustomProperties>
+  </scoreDirectorFactory>
+  
+  <environmentMode>FAST_ASSERT</environmentMode>
+  
+  <!-- Add optimization algorithms -->
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic> 
+</solver>
