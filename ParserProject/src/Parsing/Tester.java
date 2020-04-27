@@ -27,6 +27,8 @@ public class Tester {
 	static List<Course> courses;
 	static List<TimeSlot> times;
 	static List<Offering> offerings;
+	static String courseFileName = null;
+	static String roomsFileName = null;
 	
 
 	public static void main(String[] args) {
@@ -39,9 +41,9 @@ public class Tester {
 	    JMenu fm = new JMenu("File");
 	    mb.add(fm);
 	       
-	    JMenuItem open = new JMenuItem("Open...");
+	    //JMenuItem open = new JMenuItem("Open...");
 	    JFileChooser fc = new JFileChooser();
-	    open.addActionListener(new ActionListener() {
+	    /*open.addActionListener(new ActionListener() {
 	         @Override
 	         public void actionPerformed(ActionEvent e) {
 	             int rv = fc.showOpenDialog(frame);
@@ -60,15 +62,78 @@ public class Tester {
 	        		
 	             }
 	         }
-	    });
-	    fm.add(open); // Adds Button to content pane of frame
+	    });*/
+	    //fm.add(open); // Adds Button to content pane of frame
 	       
 	    JMenuItem save = new JMenuItem("Save As...");
 	    fm.add(save);
 	       
+	    JButton openCoursesFile = new JButton("Open Courses File");
+	    JButton openRoomsFile = new JButton("Open Rooms File");
 	    JButton run = new JButton("Plan Schedule");
+	    
+	    JFileChooser fcCourses = new JFileChooser();
+	    openCoursesFile.addActionListener(new ActionListener() {
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	             int rv = fcCourses.showOpenDialog(frame);
+	                
+	             if (rv == JFileChooser.APPROVE_OPTION) {
+	             	File file = fc.getSelectedFile();
+	             	
+	              	// send this file to the parser
+	             	courseFileName = file.getName();
+	             	openCoursesFile.setText("Open Courses File: " + courseFileName);
+	             	//String roomsFileName = "Spring 2020 Schedule.csv";
+	             	
+	             	// Print what was parsed
+	        		//parseFile(courseFileName, roomsFileName);
+	        		//printRooms(rooms);
+	        		//csvParser.PrintObjects(parsedCourseFile);
+	        		
+	             }
+	         }
+	    });
+	    JFileChooser fcRooms = new JFileChooser();
+	    openRoomsFile.addActionListener(new ActionListener() {
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	             int rv = fcRooms.showOpenDialog(frame);
+	                
+	             if (rv == JFileChooser.APPROVE_OPTION) {
+	             	File file = fcRooms.getSelectedFile();
+	             	
+	              	// send this file to the parser
+	             	//String courseFileName = "Spring 2020 Schedule.csv";
+	             	roomsFileName = file.getName();
+	             	openRoomsFile.setText("Open Courses File: " + roomsFileName);
+	             	
+	             	// Print what was parsed
+	        		//parseFile(courseFileName, roomsFileName);
+	        		//printRooms(rooms);
+	        		//csvParser.PrintObjects(parsedCourseFile);
+	        		
+	             }
+	         }
+	    });
+	    run.addActionListener(new ActionListener() {
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	        	// Print what was parsed
+	        	if (courseFileName != null && roomsFileName != null) {
+	        		parseFile(courseFileName, roomsFileName);
+		        	printRooms(rooms);
+		        	csvParser.PrintObjects(parsedCourseFile);
+	        	}
+	        	else {
+	        		
+	        	}
+	         }
+	    });
 	       
 	    frame.getContentPane().add(BorderLayout.NORTH, mb);
+	    frame.getContentPane().add(openCoursesFile);
+	    frame.getContentPane().add(openRoomsFile);
 	    frame.getContentPane().add(run);
 	       
 	    frame.setVisible(true);
