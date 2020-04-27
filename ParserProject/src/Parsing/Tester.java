@@ -1,6 +1,7 @@
 package Parsing;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,6 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import scheduler.Course;
 import scheduler.Offering;
@@ -35,15 +39,17 @@ public class Tester {
 		
 		JFrame frame = new JFrame("Course Scheduler");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setSize(300,300);
+	    frame.setSize(300, 200);
 	       
 	    JMenuBar mb = new JMenuBar();
 	    JMenu fm = new JMenu("File");
 	    mb.add(fm);
+	    
+	    JPanel mainMenu = new JPanel(new GridLayout(0, 1, 10, 10));
 	       
 	    //JMenuItem open = new JMenuItem("Open...");
-	    JFileChooser fc = new JFileChooser();
-	    /*open.addActionListener(new ActionListener() {
+	    /*JFileChooser fc = new JFileChooser();
+	    open.addActionListener(new ActionListener() {
 	         @Override
 	         public void actionPerformed(ActionEvent e) {
 	             int rv = fc.showOpenDialog(frame);
@@ -72,14 +78,17 @@ public class Tester {
 	    JButton openRoomsFile = new JButton("Open Rooms File");
 	    JButton run = new JButton("Plan Schedule");
 	    
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV sheet", "csv");
+	    
 	    JFileChooser fcCourses = new JFileChooser();
+	    fcCourses.setFileFilter(filter);
 	    openCoursesFile.addActionListener(new ActionListener() {
 	         @Override
 	         public void actionPerformed(ActionEvent e) {
 	             int rv = fcCourses.showOpenDialog(frame);
 	                
 	             if (rv == JFileChooser.APPROVE_OPTION) {
-	             	File file = fc.getSelectedFile();
+	             	File file = fcCourses.getSelectedFile();
 	             	
 	              	// send this file to the parser
 	             	courseFileName = file.getName();
@@ -95,6 +104,7 @@ public class Tester {
 	         }
 	    });
 	    JFileChooser fcRooms = new JFileChooser();
+	    fcRooms.setFileFilter(filter);
 	    openRoomsFile.addActionListener(new ActionListener() {
 	         @Override
 	         public void actionPerformed(ActionEvent e) {
@@ -106,7 +116,7 @@ public class Tester {
 	              	// send this file to the parser
 	             	//String courseFileName = "Spring 2020 Schedule.csv";
 	             	roomsFileName = file.getName();
-	             	openRoomsFile.setText("Open Courses File: " + roomsFileName);
+	             	openRoomsFile.setText("Open Room File: " + roomsFileName);
 	             	
 	             	// Print what was parsed
 	        		//parseFile(courseFileName, roomsFileName);
@@ -126,16 +136,18 @@ public class Tester {
 		        	csvParser.PrintObjects(parsedCourseFile);
 	        	}
 	        	else {
-	        		
+	        		JOptionPane.showMessageDialog(frame, "You must load a Courses file and a Rooms file to do this.");
 	        	}
 	         }
 	    });
-	       
+	    
+	    mainMenu.add(openCoursesFile);
+	    mainMenu.add(openRoomsFile);
+	    mainMenu.add(run);
+	    
 	    frame.getContentPane().add(BorderLayout.NORTH, mb);
-	    frame.getContentPane().add(openCoursesFile);
-	    frame.getContentPane().add(openRoomsFile);
-	    frame.getContentPane().add(run);
-	       
+	    frame.add(mainMenu);
+	    //frame.pack();
 	    frame.setVisible(true);
 		
 	}

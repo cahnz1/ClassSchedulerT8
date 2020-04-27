@@ -6,6 +6,6 @@
 
   <!-- Define the score function -->
   <scoreDirectorFactory>
-	  <easyScoreCalculatorClass>scheduler.ScoreCalculator</easyScoreCalculatorClass>
+  	<scoreDrl>main/resources/CourseScheduleScoreRules.drl</scoreDrl>
   </scoreDirectorFactory>
 </solver>
