@@ -59,11 +59,6 @@ public class SchedulerTests {
 	}
 	
 	@Test
-	public void TestRoomListEqualsInputRoomList() {
-		
-	}
-	
-	@Test
 	public void TestsOfferingCapacityIsNotGreaterThanRoomCapacity() {
 		
 		boolean noRoomOverCapacity = true;

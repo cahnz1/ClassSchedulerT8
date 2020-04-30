@@ -16,14 +16,14 @@ CMSC,203,Discrete Structures,3,'Yesha, Yaacov',tt10:00,40,Sherman Hall,014
 CMSC,203,Discrete Structures,4,'Yesha, Yaacov',tt11:30,40,Information Technology,227
 CMSC,203,Discrete Structures,5,'Joeg, Prasanna',mw1:00,40,Sherman Hall,013
 CMSC,203,Discrete Structures,6,'Joeg, Prasanna',mw2:30,40,Engineering,122, 122A
-CMSC,291,Continued Computer Science for Non-Majors,1,'Staff',mw10:00,30,Sherman Hall,014
+CMSC,291,Continued Computer Science for Non-Majors,1,'Staff',mw10:00,30,Sherman Hall,013
 CMSC,304,Social & Ethical Issues in IT,1,'Staff',tt5:30,40,Math & Psychology,106
 CMSC,304,Social & Ethical Issues in IT,2,'Staff',tt7:10,40,Sherman Hall,014
 CMSC,304,Social & Ethical Issues in IT,3,'Staff',mw5:30,40,Math & Psychology,106
 CMSC,304,Social & Ethical Issues in IT,4,'Staff',mw7:10,40,Information Technology,227
 CMSC,304,Social & Ethical Issues in IT,5,'Staff',tt5:30,40,Meyerhoff Chemistry,030
 CMSC,304,Social & Ethical Issues in IT,6,'Staff',mw5:30,40,Meyerhoff Chemistry,030
-CMSC,313,Comp. Org. & Assembly Lang.,1,'Sekyonda, Ivan',mw10:00,40,Information Technology,227
+CMSC,313,Comp. Org. & Assembly Lang.,1,'Sekyonda, Ivan',tt11:30,40,Engineering,122, 122A
 CMSC,313,Comp. Org. & Assembly Lang.,2,'Sekyonda, Ivan',tt4:00,40,Sherman Hall,013
 CMSC,313,Comp. Org. & Assembly Lang.,3,'Kartchner, Jeannette',mw1:00,40,Math & Psychology,106
 CMSC,313,Comp. Org. & Assembly Lang.,4,'Sekyonda, Ivan',mw2:30,40,Sherman Hall,014
@@ -41,7 +41,7 @@ CMSC,411ce,Computer Architecture,1,'Squire, Jon',tt2:30,40,Janet & Walter Sondhe
 CMSC,411cs,Computer Architecture,1,'Sekyonda, Ivan',mw1:00,40,Interdisciplinary Life S,237
 CMSC,411cs,Computer Architecture,2,'Olano, Marc',mw2:30,40,Janet & Walter Sondheim,109
 CMSC,411cs,Computer Architecture,3,'Staff',tt5:30,40,Biological Sciences,120
-CMSC,421,Operating Systems,1,'Staff',tt11:30,40,Engineering,122, 122A
+CMSC,421,Operating Systems,1,'Staff',mw7:10,40,Engineering,122, 122A
 CMSC,421,Operating Systems,2,'Perkins, Dmitri',tt2:30,40,Math & Psychology,106
 CMSC,421,Operating Systems,3,'Staff',mw5:30,40,Biological Sciences,120
 CMSC,426,Computer Security,1,'Staff',tt1:00,40,Janet & Walter Sondheim,109
@@ -49,14 +49,14 @@ CMSC,426,Computer Security,3,'Staff',tt4:00,40,Biological Sciences,120
 CMSC,435/634,Computer Graphics,1,'Olano, Marc',mw1:00,50,Information Technology,227
 CMSC,441,Algorithms,1,'Chang, Richard',tt1:00,40,Math & Psychology,106
 CMSC,441,Algorithms,2,'Chang, Richard',tt10:00,40,Janet & Walter Sondheim,109
-CMSC,441,Algorithms,3,'Marron, Christopher',mw7:10,40,Engineering,122, 122A
+CMSC,441,Algorithms,3,'Marron, Christopher',tt11:30,40,Sherman Hall,014
 CMSC,443/652,Cryptography and Data Security,1,'Zhang, Haibin',tt10:00,50,Information Technology,227
 CMSC,447,Software Engineering I,1,'Dutt, Abhijit',mw1:00,30,Sherman Hall,151
 CMSC,447,Software Engineering I,2,'Dutt, Abhijit',mw2:30,30,Sherman Hall,151
 CMSC,447,Software Engineering I,3,'Staff',tt5:30,30,Sherman Hall,151
 CMSC,447,Software Engineering I,4,'Staff',tt7:10,30,Sherman Hall,013
 CMSC,455,Numerical Computations,2,'Squire, Jon',mw4:00,40,Janet & Walter Sondheim,109
-CMSC,461,Databases,1,'Kalpakis, Kostas',mwf10:00,40,Engineering,122, 122A
+CMSC,461,Databases,1,'Kalpakis, Kostas',mw10:00,40,Sherman Hall,014
 CMSC,461,Databases,2,'Staff',mw2:30,40,Math & Psychology,106
 CMSC,471,Artificial Intelligence,1,'Vafaei, Fereydoon',mw4:00,50,Information Technology,227
 CMSC,471,Artificial Intelligence,2,'Finin, Tim',tt4:00,50,Information Technology,227
