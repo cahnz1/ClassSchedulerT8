@@ -154,8 +154,17 @@ public class Tester {
 	
 	public static void parseFile(String courseFileName, String roomsFileName) {
 		csvParser = new Parser();
-		parsedCourseFile = csvParser.ParseCSV(courseFileName);
-		rooms = csvParser.GetRoomObjects(roomsFileName);
+		try {
+			parsedCourseFile = csvParser.ParseCSV(courseFileName);
+			String[] requiredKeys = new String[]{"subject", "course #", "course title", "ver.", "sec.", "instructor real name", "time", "capacity"};
+			csvParser.CheckForRequiredKeys(parsedCourseFile, requiredKeys);
+			rooms = csvParser.GetRoomObjects(roomsFileName);
+		}catch(IncorrectFileFormatException e) {
+			return;
+		}catch(MissingInformationException e) {
+			e.printStackTrace();
+			return;
+		}
 		courses =  csvParser.GetCourseObjects(parsedCourseFile);
 		times = csvParser.GetTimeSlotObjects(parsedCourseFile);
 		offerings = csvParser.GetOfferingObjects(parsedCourseFile, courses, times);

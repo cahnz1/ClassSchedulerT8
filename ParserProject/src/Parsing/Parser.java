@@ -67,8 +67,11 @@ public class Parser {
 			return rooms;
 		}
 		
-		public List<Room> GetRoomObjects(String fileName){
-			return GetRoomObjects(ParseCSV(fileName));
+		public List<Room> GetRoomObjects(String fileName) throws IncorrectFileFormatException, MissingInformationException{
+			List<Map<String,String>> parsedObjects = ParseCSV(fileName);
+			String[] requiredKeys = new String[]{"class room","capacity"};
+			CheckForRequiredKeys(parsedObjects, requiredKeys);
+			return GetRoomObjects(parsedObjects);
 		}
 		
 		//Courses_________________________________________________________________________
@@ -198,12 +201,12 @@ public class Parser {
 		
 		//Returns A List Of Key Values For Any CSV File, Assuming First Row Is The Name Of The Keys
 		
-		public List<Map<String, String>> ParseCSV(String fileName) {
+		public List<Map<String, String>> ParseCSV(String fileName) throws IncorrectFileFormatException {
 			File inputFile = new File(fileName);
 			
 			boolean validFile = CheckExtension(fileName, CSV_EXTENSION);
 			if(!validFile) {
-				return null;
+				throw new IncorrectFileFormatException("Incorrect File Format, " + CSV_EXTENSION + "");
 			}
 			
 			
@@ -284,10 +287,6 @@ public class Parser {
 		private boolean CheckExtension(String fileName, String expectedExtension) {
 			String extension = getExtension(fileName);
 			if(!extension.equals(expectedExtension)) {
-				println("Incorrect File Format!");
-				println("Input Format:\t\t" + extension);
-				println("Expected Format:\t" + expectedExtension);
-				println();
 				return false;
 			}
 			debugPrintln();
@@ -297,6 +296,16 @@ public class Parser {
 		private String getExtension(String fileName) {
 			int extensionStart = fileName.lastIndexOf('.');
 			return(fileName.substring(extensionStart));
+		}
+		
+		public void CheckForRequiredKeys(List<Map<String, String>> objects, String[] requiredKeys) throws MissingInformationException {
+			for(int i = 0 ; i < requiredKeys.length; i++) {
+				if(!objects.get(0).containsKey(requiredKeys[i])) {
+					throw new MissingInformationException("File is missing " + requiredKeys[i] + " information");
+				}
+				
+			}
+
 		}
 		
 		private Course FindCourse(List<Course> courses,String title, String code) {
@@ -345,5 +354,12 @@ public class Parser {
 			if(!debug)return;
 			System.out.println();
 		}
+		
+		
+		
 	
 }
+
+
+
+
