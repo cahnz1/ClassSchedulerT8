@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +106,7 @@ public class SchedulerTests {
 	}
 	
 	@Test
-	public void TestsNoRoomIsAssignedToMultipleClassseAtTheSameTime() {
+	public void TestsNoRoomIsAssignedToMultipleClassesAtTheSameTime() {
 		
 		boolean noRoomAssignedToConcurrentClasses = true;
 		
@@ -123,4 +128,50 @@ public class SchedulerTests {
         
         assertTrue(noRoomAssignedToConcurrentClasses);
 	}
+	
+	public boolean checkOverlapping(String time1, String time2) {
+    	DateFormat dateFormat24 = new SimpleDateFormat("HH:mm"); // 24 hour format
+    	
+    	Date start1 = convertTimeString(time1);
+	    Date end1 = Date.from(start1.toInstant().plus(Duration.ofMinutes(89)));
+	    
+	    String strTime2 = time2;
+		Date start2 = convertTimeString(time2);
+	    Date end2 = Date.from(start2.toInstant().plus(Duration.ofMinutes(89)));
+	    
+	    if (!start1.after(end2) && !start2.after(end1)) {
+	    	return true;
+	    }
+	    
+	    return false;
+    }
+    
+    public Date convertTimeString(String timeInput) {
+    	DateFormat dateFormat24 = new SimpleDateFormat("HH:mm");
+    	
+    	String strTime1 = timeInput;
+		Date timeObj = null;
+		
+		try {
+			timeObj = dateFormat24.parse(strTime1);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Date convertToPMBound = null;
+		
+		try {
+			convertToPMBound = dateFormat24.parse("10:00");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (!timeObj.after(convertToPMBound)) {
+	    	timeObj = Date.from(timeObj.toInstant().plus(Duration.ofHours(12)));
+	    }
+		
+		return timeObj;
+    }
 }

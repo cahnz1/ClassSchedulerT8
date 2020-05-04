@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import scheduler.Course;
+import scheduler.CourseSchedulerApp;
 import scheduler.Offering;
 import scheduler.Room;
 import scheduler.TimeSlot;
@@ -132,8 +134,22 @@ public class Tester {
 	        	// Print what was parsed
 	        	if (courseFileName != null && roomsFileName != null) {
 	        		parseFile(courseFileName, roomsFileName);
-		        	printRooms(rooms);
-		        	csvParser.PrintObjects(parsedCourseFile);
+		        	//printRooms(rooms);
+		        	//csvParser.PrintObjects(parsedCourseFile);
+		        	String courseFileName = "Spring 2020 Schedule.csv";
+		    		String roomsFileName = "ClassRoom.csv";
+		     	
+		    		// Print what was parsed
+		    		//parseFile(courseFileName, roomsFileName);
+		    		CourseSchedulerApp scheduler = new CourseSchedulerApp(rooms, courses, times, offerings);
+		    		scheduler.generateSolution();
+		    		
+		    		try {
+						scheduler.Output("schedule.csv");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 	        	}
 	        	else {
 	        		JOptionPane.showMessageDialog(frame, "You must load a Courses file and a Rooms file to do this.");

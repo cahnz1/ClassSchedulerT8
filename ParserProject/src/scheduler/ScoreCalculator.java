@@ -42,8 +42,6 @@ public class ScoreCalculator
 	    Date end2 = Date.from(start2.toInstant().plus(Duration.ofMinutes(89)));
 	    
 	    if (!start1.after(end2) && !start2.after(end1)) {
-	    	//System.out.print("start 1: " + dateFormat24.format(start1));
-	    	//System.out.print("start 2: " + dateFormat24.format(start2));
 	    	return true;
 	    }
 	    
