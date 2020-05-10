@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import Parsing.IncorrectFileFormatException;
+import Parsing.MissingInformationException;
 import Parsing.Parser;
 
 public class Tester {
@@ -15,7 +17,7 @@ public class Tester {
 	static List<TimeSlot> times;
 	static List<Offering> offerings;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, IncorrectFileFormatException, MissingInformationException {
 		// send this file to the parser	
 		String courseFileName = "Spring 2020 Schedule.csv";
 		String roomsFileName = "ClassRoom.csv";
@@ -28,7 +30,7 @@ public class Tester {
 		
 	}
 	
-	public static void parseFile(String courseFileName, String roomsFileName) {
+	public static void parseFile(String courseFileName, String roomsFileName) throws IncorrectFileFormatException, MissingInformationException {
 		csvParser = new Parser();
 		parsedCourseFile = csvParser.ParseCSV(courseFileName);
 		rooms = csvParser.GetRoomObjects(roomsFileName);

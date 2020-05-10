@@ -18,6 +18,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import Parsing.IncorrectFileFormatException;
+import Parsing.MissingInformationException;
 import Parsing.Parser;
 import scheduler.Course;
 import scheduler.CourseSchedulerApp;
@@ -36,7 +38,7 @@ public class SchedulerTests {
 	private List<Offering> offerings;
 	
 	@BeforeAll 
-	public void createOutputFile() throws IOException{
+	public void createOutputFile() throws IOException, IncorrectFileFormatException, MissingInformationException {
 		// send this file to the parser	
 		String courseFileName = "Spring 2020 Schedule.csv";
 		String roomsFileName = "ClassRoom.csv";
