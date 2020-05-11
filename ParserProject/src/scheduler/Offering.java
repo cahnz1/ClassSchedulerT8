@@ -117,17 +117,21 @@ public class Offering {
     }
   
   public int getPriority() {
-	  int E = 1;
+	  int E = 2;
 	  int IT = 0;
-	  int IL = 7;
-	  int JWS = 3;
-	  int MC = 5;
-	  int SH = 2;
-	  int BS = 6;
-	  int MP = 4;
-	  int PP = 8;
+	  int IL = 10;
+	  int JWS = 4;
+	  int MC = 7;
+	  int SH = 1;
+	  int BS = 9;
+	  int MP = 6;
+	  int PP = 12;
+	  int FA = 5;
+	  int PAH = 8;
+	  int P = 11;
+	  int UC = 3;
 	  
-	  int priority = 9; //initialized here so compiler doesn't yell at me
+	  int priority = 13; //initialized here so compiler doesn't yell at me
 	  
 	    
 	  if(room.getBuilding().compareTo("Engineering") == 0) {
@@ -157,7 +161,19 @@ public class Offering {
 	  else if (room.getBuilding().compareTo("Math & Psychology") == 0) {
 		  priority =  MP;
 	  }
-	  
+	  else if (room.getBuilding().compareTo("Fine Arts") == 0) {
+		  priority =  FA;
+	  }
+	  else if (room.getBuilding().compareTo("Performing Arts & Humanities") == 0) {
+		  priority =  PAH;
+	  }
+	  else if (room.getBuilding().compareTo("Physics") == 0) {
+		  priority =  P;
+	  }
+	  else if (room.getBuilding().compareTo("University Center") == 0) {
+		  priority =  UC;
+	  }
+	   
 	  else {
 		  //there is no building
 		  System.out.print("Error: Invalid building name in room info file: " + room.getBuilding() + " is invalid or doesn't host computer science classes");
