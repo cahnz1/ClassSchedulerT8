@@ -160,7 +160,7 @@ public class Offering {
 	  
 	  else {
 		  //there is no building
-		  System.out.print("there is no building with this name");
+		  System.out.print("Error: Invalid building name in room info file. " + room.getBuilding() + " is invalid");
 		  ErrorMsg();
 	  }
 	   
