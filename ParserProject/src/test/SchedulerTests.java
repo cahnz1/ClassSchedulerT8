@@ -1,7 +1,9 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +11,18 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.github.javaparser.utils.Pair;
 
 import Parsing.IncorrectFileFormatException;
 import Parsing.MissingInformationException;
@@ -37,7 +43,7 @@ public class SchedulerTests {
 	private List<TimeSlot> times;
 	private List<Offering> offerings;
 	
-	@BeforeAll 
+	@Before 
 	public void createOutputFile() throws IOException, IncorrectFileFormatException, MissingInformationException {
 		// send this file to the parser	
 		String courseFileName = "Spring 2020 Schedule.csv";
@@ -49,10 +55,10 @@ public class SchedulerTests {
 		List<Room> inputRooms = csvParser.GetRoomObjects(roomsFileName);
 		List<Course> inputCourses =  csvParser.GetCourseObjects(parsedCourseFile);
 		List<TimeSlot> inputTimes = csvParser.GetTimeSlotObjects(parsedCourseFile);
-		List<Offering> inputOfferings = csvParser.GetOfferingObjects(parsedCourseFile, courses, times);
+		List<Offering> inputOfferings = csvParser.GetOfferingObjects(parsedCourseFile, inputCourses, inputTimes);
 		
 		// Run solver and output solution
-		CourseSchedulerApp scheduler = new CourseSchedulerApp(rooms, courses, times, offerings);
+		CourseSchedulerApp scheduler = new CourseSchedulerApp(inputRooms, inputCourses, inputTimes, inputOfferings);
 		scheduler.generateSolution();
 		this.rooms = scheduler.getSchedule().getRoomList();
 		this.courses = scheduler.getSchedule().getCourseList();
@@ -86,21 +92,46 @@ public class SchedulerTests {
 		
 		boolean noTeacherAssignedConcurrentClasses = true;
 		
-		Set<String> instructorTimes = new HashSet<>();
+		HashMap<String, ArrayList<Pair<String,String>>> instructorTimes = new HashMap<>();
         for(Offering offering : offerings) {
         	if (offering.getTimeSlot() != null) {
-        		String instructorTimeSlot = offering.getInstructorName() +
-    				offering.getTimeSlot().getDays() +
-    				offering.getTimeSlot().getTime();
-        	
-        		if (offering.getInstructorName().compareTo("Staff") != 0) { //if instructor is not Staff
-        			if (instructorTimes.contains(instructorTimeSlot)) {
-        				noTeacherAssignedConcurrentClasses = false;
-        			}
-        			else {
-        				instructorTimes.add(instructorTimeSlot);
-        			}
-        		}
+        		
+        		String instructorName = offering.getInstructorName();
+    			String strDay1 = offering.getTimeSlot().getDays();
+    			String strTime1 = offering.getTimeSlot().getTime();
+    			Pair<String,String> timeValue = new Pair<String,String>(strDay1, strTime1);
+    			
+    			if (instructorTimes.get(instructorName) != null) {
+    				
+    				boolean foundInList = false;
+    				for (int i=0; i < instructorTimes.get(instructorName).size(); i++) {
+    					
+    					if (instructorName.compareTo("Staff") != 0) { //if instructor is not Staff
+    						String strDay2 = instructorTimes.get(instructorName).get(i).a;
+    						
+    						if (strDay1.contains(strDay2) || strDay2.contains(strDay1)) {
+    							String strTime2 = instructorTimes.get(instructorName).get(i).b;
+    							    							
+    							if (checkOverlapping(strTime1, strTime2) == true) {
+    								noTeacherAssignedConcurrentClasses = false;
+    							}
+    							
+    							if (strDay2.compareTo(strDay1) == 0 && strTime2.compareTo(strTime1) == 0) {
+									foundInList = true;
+								}
+    							
+    						}
+    					}
+    				}
+    				
+    				if (foundInList == false) {
+						instructorTimes.get(offering.getInstructorName()).add(timeValue);
+					}
+    			} else {
+    				ArrayList<Pair<String,String>> newList = new ArrayList<Pair<String,String>>();
+    				newList.add(timeValue);
+    				instructorTimes.put(instructorName,newList);
+    			}
         	}
         }
         
@@ -112,19 +143,42 @@ public class SchedulerTests {
 		
 		boolean noRoomAssignedToConcurrentClasses = true;
 		
-		Set<String> occupiedRooms = new HashSet<>();
-        for(Offering offering : offerings) {
+		HashMap<String, ArrayList<Pair<String,String>>> roomTimes = new HashMap<>();
+		for(Offering offering : offerings) {
         	if (offering.getRoom() != null && offering.getTimeSlot() != null) {
-        		//System.out.print("enters this statement");
-        		String roomInUse = offering.getRoom().getBuilding() +
-        				offering.getRoom().getNumber() +
-        				offering.getTimeSlot().getDays() +
-        				offering.getTimeSlot().getTime();
-        		if(occupiedRooms.contains(roomInUse)){
-        			noRoomAssignedToConcurrentClasses = false;
-        		} else {
-        			occupiedRooms.add(roomInUse);
-        		}
+        		String roomString = offering.getRoom().getBuilding() + 
+        				offering.getRoom().getNumber();
+    			String strDay1 = offering.getTimeSlot().getDays();
+    			String strTime1 = offering.getTimeSlot().getTime();
+    			Pair<String,String> timeValue = new Pair<String,String>(strDay1, strTime1);
+    			
+    			if (roomTimes.get(roomString) != null) {
+    				
+    				boolean foundInList = false;
+    				for (int i=0; i < roomTimes.get(roomString).size(); i++) {
+    					
+    					String strDay2 = roomTimes.get(roomString).get(i).a;
+    						
+    					if (strDay1.contains(strDay2) || strDay2.contains(strDay1)) {
+    						String strTime2 = roomTimes.get(roomString).get(i).b;
+    							    							
+    						if (checkOverlapping(strTime1, strTime2) == true) {
+    							noRoomAssignedToConcurrentClasses = false;
+    						}
+    						if (strDay2.compareTo(strDay1) == 0 && strTime2.compareTo(strTime1) == 0) {
+								foundInList = true;
+							}
+    					}
+    				}
+    				
+    				if (foundInList == false) {
+						roomTimes.get(roomString).add(timeValue);
+					}
+    			} else {
+    				ArrayList<Pair<String,String>> newList = new ArrayList<Pair<String,String>>();
+    				newList.add(timeValue);
+    				roomTimes.put(roomString,newList);
+    			}
         	}
         }
         
