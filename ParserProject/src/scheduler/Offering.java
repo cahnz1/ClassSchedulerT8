@@ -111,7 +111,7 @@ public class Offering {
 //--------zippy code---------------
   
   public void ErrorMsg() {
-      String message = "there is no building with this name";
+      String message = "Error: Invalid building name in room info file. " + room.getBuilding() + " is invalid or doesn't host computer science classes";
       JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
           JOptionPane.ERROR_MESSAGE);
     }
@@ -160,7 +160,7 @@ public class Offering {
 	  
 	  else {
 		  //there is no building
-		  System.out.print("Error: Invalid building name in room info file. " + room.getBuilding() + " is invalid");
+		  System.out.print("Error: Invalid building name in room info file: " + room.getBuilding() + " is invalid or doesn't host computer science classes");
 		  ErrorMsg();
 	  }
 	   
