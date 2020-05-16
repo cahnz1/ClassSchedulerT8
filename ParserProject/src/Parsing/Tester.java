@@ -138,9 +138,9 @@ public class Tester {
 	        		try {
 	        			parseFile(courseFileName, roomsFileName);
 	        		} catch (MissingInformationException ex) {
-	        			JOptionPane.showMessageDialog(frame, ex.getMessage());
+	        			JOptionPane.showMessageDialog(frame, ex.getMessage() + ". Please ensure the file is formatted correctly.");
 	        		} catch (IncorrectFileFormatException ex) {
-	        			JOptionPane.showMessageDialog(frame, ex.getMessage());
+	        			JOptionPane.showMessageDialog(frame, ex.getMessage() + ". Please ensure the file is a .csv file.");
 	        		}
 		        	//printRooms(rooms);
 		        	//csvParser.PrintObjects(parsedCourseFile);
@@ -181,7 +181,7 @@ public class Tester {
 		
 	}
 	
-	public static void parseFile(String courseFileName, String roomsFileName) {
+	public static void parseFile(String courseFileName, String roomsFileName) throws IncorrectFileFormatException, MissingInformationException {
 		csvParser = new Parser();
 		try {
 			parsedCourseFile = csvParser.ParseCSV(courseFileName);
@@ -189,10 +189,9 @@ public class Tester {
 			csvParser.CheckForRequiredKeys(parsedCourseFile, requiredKeys);
 			rooms = csvParser.GetRoomObjects(roomsFileName);
 		}catch(IncorrectFileFormatException e) {
-			return;
+			throw e;
 		}catch(MissingInformationException e) {
-			e.printStackTrace();
-			return;
+			throw e;
 		}
 		courses =  csvParser.GetCourseObjects(parsedCourseFile);
 		times = csvParser.GetTimeSlotObjects(parsedCourseFile);
