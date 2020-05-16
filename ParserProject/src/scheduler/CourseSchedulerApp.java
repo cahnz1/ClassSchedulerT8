@@ -71,10 +71,10 @@ public class CourseSchedulerApp {
 		
 	}
 	
-	public void Output(String fileName) throws IOException {
-		File toWrite = new File(fileName);
+	public void Output(File toWrite) throws IOException {
+		//File toWrite = new File(fileName);
 		
-		boolean validFile = CheckExtension(fileName, CSV_EXTENSION);
+		boolean validFile = CheckExtension(toWrite.getName(), CSV_EXTENSION);
 		if(!validFile) {
 			return;
 		}

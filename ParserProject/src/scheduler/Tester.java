@@ -1,5 +1,6 @@
 package scheduler;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,8 @@ public class Tester {
 		parseFile(courseFileName, roomsFileName);
 		CourseSchedulerApp scheduler = new CourseSchedulerApp(rooms, courses, times, offerings);
 		scheduler.generateSolution();
-		scheduler.Output("schedule.csv");
+		File file = new File("schedule.csv");
+		scheduler.Output(file);
 		
 	}
 	

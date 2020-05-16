@@ -44,8 +44,8 @@ public class Tester {
 	    frame.setSize(300, 200);
 	       
 	    JMenuBar mb = new JMenuBar();
-	    JMenu fm = new JMenu("File");
-	    mb.add(fm);
+	    /*JMenu fm = new JMenu("File");
+	    mb.add(fm);*/
 	    
 	    JPanel mainMenu = new JPanel(new GridLayout(0, 1, 10, 10));
 	       
@@ -73,8 +73,8 @@ public class Tester {
 	    });*/
 	    //fm.add(open); // Adds Button to content pane of frame
 	       
-	    JMenuItem save = new JMenuItem("Save As...");
-	    fm.add(save);
+	    /*JMenuItem save = new JMenuItem("Save As...");
+	    fm.add(save);*/
 	       
 	    JButton openCoursesFile = new JButton("Open Courses File");
 	    JButton openRoomsFile = new JButton("Open Rooms File");
@@ -128,28 +128,41 @@ public class Tester {
 	             }
 	         }
 	    });
+	    JFileChooser fcSave = new JFileChooser();
+	    fcSave.setFileFilter(filter);
 	    run.addActionListener(new ActionListener() {
 	         @Override
 	         public void actionPerformed(ActionEvent e) {
 	        	// Print what was parsed
 	        	if (courseFileName != null && roomsFileName != null) {
-	        		parseFile(courseFileName, roomsFileName);
+	        		try {
+	        			parseFile(courseFileName, roomsFileName);
+	        		} catch (MissingInformationException ex) {
+	        			JOptionPane.showMessageDialog(frame, ex.getMessage());
+	        		} catch (IncorrectFileFormatException ex) {
+	        			JOptionPane.showMessageDialog(frame, ex.getMessage());
+	        		}
 		        	//printRooms(rooms);
 		        	//csvParser.PrintObjects(parsedCourseFile);
-		        	String courseFileName = "Spring 2020 Schedule.csv";
-		    		String roomsFileName = "ClassRoom.csv";
+		        	//String courseFileName = "Spring 2020 Schedule.csv";
+		    		//String roomsFileName = "ClassRoom.csv";
 		     	
 		    		// Print what was parsed
 		    		//parseFile(courseFileName, roomsFileName);
 		    		CourseSchedulerApp scheduler = new CourseSchedulerApp(rooms, courses, times, offerings);
 		    		scheduler.generateSolution();
-		    		
-		    		try {
-						scheduler.Output("schedule.csv");
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+		    		int rv = fcSave.showSaveDialog(frame);
+	                
+		            if (rv == JFileChooser.APPROVE_OPTION) {
+		             	File toWrite = fcSave.getSelectedFile();
+		            
+			    		try {
+							scheduler.Output(toWrite);
+						} catch (IOException ex) {
+							// TODO Auto-generated catch block
+							ex.printStackTrace();
+						}
+		            }
 	        	}
 	        	else {
 	        		JOptionPane.showMessageDialog(frame, "You must load a Courses file and a Rooms file to do this.");
