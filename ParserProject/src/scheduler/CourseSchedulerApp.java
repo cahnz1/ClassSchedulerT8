@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 
@@ -33,6 +34,9 @@ public class CourseSchedulerApp {
 	
 	private String getExtension(String fileName) {
 		int extensionStart = fileName.lastIndexOf('.');
+		if (extensionStart == -1) {
+			return "";
+		}
 		return(fileName.substring(extensionStart));
 	}
 	
@@ -47,10 +51,6 @@ public class CourseSchedulerApp {
 	private boolean CheckExtension(String fileName, String expectedExtension) {
 		String extension = getExtension(fileName);
 		if(!extension.equals(expectedExtension)) {
-			println("Incorrect File Format!");
-			println("Input Format:\t\t" + extension);
-			println("Expected Format:\t" + expectedExtension);
-			println();
 			return false;
 		}
 		return true;
@@ -75,11 +75,23 @@ public class CourseSchedulerApp {
 		//File toWrite = new File(fileName);
 		
 		boolean validFile = CheckExtension(toWrite.getName(), CSV_EXTENSION);
-		if(!validFile) {
-			return;
+		
+		String nameOfFile = toWrite.getAbsolutePath();
+		String currentExtension = getExtension(nameOfFile);
+		String newFileName = "";
+		String newExtension = "csv";
+		
+		
+		if(!validFile) { //if extension is not ".csv"
+			if (currentExtension.equals("")){
+				newFileName = nameOfFile + "." + newExtension;
+			} else {
+				newFileName = nameOfFile.replaceAll("." + currentExtension, newExtension);
+			}
 		}
 		
-		FileWriter outputFile = new FileWriter(toWrite); 
+		File validatedFile = new File(newFileName);
+		FileWriter outputFile = new FileWriter(validatedFile); 
 		
 		outputFile.write("Subject,Course #,Course Title,Sec.,Instructor Real Name,Time,Capacity, Building, Room Number\n");
 		for(Offering offering: schedule.getOfferingList()) {
@@ -96,6 +108,5 @@ public class CourseSchedulerApp {
 			outputFile.write(nextLine);
 		}
 		outputFile.close();
-		
 	}
 }

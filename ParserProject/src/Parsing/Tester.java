@@ -93,7 +93,7 @@ public class Tester {
 	             	File file = fcCourses.getSelectedFile();
 	             	
 	              	// send this file to the parser
-	             	courseFileName = file.getName();
+	             	courseFileName = file.getAbsolutePath();
 	             	openCoursesFile.setText("Open Courses File: " + courseFileName);
 	             	//String roomsFileName = "Spring 2020 Schedule.csv";
 	             	
@@ -117,7 +117,7 @@ public class Tester {
 	             	
 	              	// send this file to the parser
 	             	//String courseFileName = "Spring 2020 Schedule.csv";
-	             	roomsFileName = file.getName();
+	             	roomsFileName = file.getAbsolutePath();
 	             	openRoomsFile.setText("Open Room File: " + roomsFileName);
 	             	
 	             	// Print what was parsed
