@@ -32,6 +32,30 @@ public class CourseSchedulerApp {
         this.schedule = newSchedule;
     }
 	
+	public String getAlternateTimes() {
+		String alternateTimes = "This schedule could not be made with the suggested times, so alternates were given. Alternate Times Scheduled:\n";
+		boolean alternateTimesNeeded = false;
+		for (Offering offering: schedule.getOfferingList()) {
+			if (offering.getTimeSlot() != offering.getSuggestedTime()) {
+				alternateTimes += offering.getCourse().getCourseTitle() + "," + 
+						  offering.getCourse().getCourseTitle() + "," +
+						  Integer.toString(offering.getSectionNumber()) + "," +
+						  offering.getInstructorName() + "," + 
+						  offering.getTimeSlot().getDays() + "," +
+						  offering.getTimeSlot().getTime() + "," +
+						  offering.getRoom().getBuilding() + "," +
+						  offering.getRoom().getNumber() + "\n";
+				alternateTimesNeeded = true;
+			}
+		}
+		
+		if (alternateTimesNeeded == true) {
+			return alternateTimes;
+		} else {
+			return "";
+		}
+	}
+	
 	private String getExtension(String fileName) {
 		int extensionStart = fileName.lastIndexOf('.');
 		if (extensionStart == -1) {
