@@ -89,7 +89,9 @@ public class CourseSchedulerApp {
 				newFileName = nameOfFile.replaceAll("." + currentExtension, newExtension);
 			}
 		}
-		
+		else {
+			newFileName = nameOfFile;
+		}
 		File validatedFile = new File(newFileName);
 		FileWriter outputFile = new FileWriter(validatedFile); 
 		

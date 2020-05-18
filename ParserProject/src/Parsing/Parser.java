@@ -28,7 +28,7 @@ public class Parser {
 		//Specific To Project
 		
 		//Rooms_________________________________________________________________________
-		public List<Room> GetRoomObjects(List<Map<String, String>> inputRooms) {
+		public List<Room> GetRoomObjects(List<Map<String, String>> inputRooms) throws IncorrectFileFormatException {
 			List<Room> rooms = new ArrayList<Room>();
 			
 			for (Map<String,String> inputRoom : inputRooms) {
@@ -61,6 +61,14 @@ public class Parser {
 					Room newRoom = new Room(building, roomNumber, capacity);
 					rooms.add(newRoom);
 				}
+				
+				for (Room r : rooms) {
+					int priority = r.getPriority();
+					if (priority == 13) {
+						throw new IncorrectFileFormatException("Incorrect Spelling on File");
+					}
+				}
+				
 				
 			}
 			
@@ -186,8 +194,7 @@ public class Parser {
 				
 				Offering newOffering = new Offering(section, instructorName, room, course, timeSlot, capacity);
 				
-				offerings.add(newOffering);
-				
+				offerings.add(newOffering);	
 			}
 			
 			return offerings;
