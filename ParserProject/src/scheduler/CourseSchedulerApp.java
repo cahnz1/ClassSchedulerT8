@@ -36,8 +36,10 @@ public class CourseSchedulerApp {
 		String alternateTimes = "This schedule could not be made with the suggested times, so alternates were given. Alternate Times Scheduled:\n";
 		boolean alternateTimesNeeded = false;
 		for (Offering offering: schedule.getOfferingList()) {
-			if (offering.getTimeSlot() != offering.getSuggestedTime()) {
-				alternateTimes += offering.getCourse().getCourseTitle() + "," + 
+			if (offering.getTimeSlot() != null && offering.getSuggestedTime() != null) {
+			if (offering.getTimeSlot().getDays() != offering.getSuggestedTime().getDays() || 
+    				offering.getTimeSlot().getTime() != offering.getSuggestedTime().getTime()) {
+				alternateTimes += offering.getCourse().getCourseCode() + "," + 
 						  offering.getCourse().getCourseTitle() + "," +
 						  Integer.toString(offering.getSectionNumber()) + "," +
 						  offering.getInstructorName() + "," + 
@@ -47,6 +49,7 @@ public class CourseSchedulerApp {
 						  offering.getRoom().getNumber() + "\n";
 				alternateTimesNeeded = true;
 			}
+		}
 		}
 		
 		if (alternateTimesNeeded == true) {

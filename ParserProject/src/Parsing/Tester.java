@@ -163,6 +163,8 @@ public class Tester {
 							ex.printStackTrace();
 						}
 		            }
+		            
+		            System.out.print(scheduler.getAlternateTimes());
 	        	}
 	        	else {
 	        		JOptionPane.showMessageDialog(frame, "You must load a Courses file and a Rooms file to do this.");
