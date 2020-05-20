@@ -1,6 +1,7 @@
 package Parsing;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -150,21 +151,34 @@ public class Tester {
 		    		// Print what was parsed
 		    		//parseFile(courseFileName, roomsFileName);
 		    		CourseSchedulerApp scheduler = new CourseSchedulerApp(rooms, courses, times, offerings);
+		    		frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		    		scheduler.generateSolution();
-		    		int rv = fcSave.showSaveDialog(frame);
-	                
-		            if (rv == JFileChooser.APPROVE_OPTION) {
-		             	File toWrite = fcSave.getSelectedFile();
-		            
-			    		try {
-							scheduler.Output(toWrite);
-						} catch (IOException ex) {
-							// TODO Auto-generated catch block
-							ex.printStackTrace();
-						}
-		            }
-		            
-		            System.out.print(scheduler.getAlternateTimes());
+		    		frame.setCursor(Cursor.getDefaultCursor());
+		    		String alternateTimes = scheduler.getAlternateTimes();
+		    		int altrv = JOptionPane.YES_OPTION;
+		    		
+		    		if (alternateTimes != "" ) {
+		    			altrv = JOptionPane.showConfirmDialog(frame, alternateTimes + "\n Would you like to save the revised schedule?", "Scheduling conflicts found",
+		    					JOptionPane.YES_NO_OPTION);
+		    		}
+		    		
+		    		if (altrv == JOptionPane.YES_OPTION) {
+		    			int rv = fcSave.showSaveDialog(frame);
+		                
+			            if (rv == JFileChooser.APPROVE_OPTION) {
+			             	File toWrite = fcSave.getSelectedFile();
+			            
+				    		try {
+								scheduler.Output(toWrite);
+								run.setText("Schedule saved: " + toWrite.getAbsolutePath());
+							} catch (IOException ex) {
+								// TODO Auto-generated catch block
+								ex.printStackTrace();
+							}
+			            }
+		    		}
+		    		
+		            System.out.print(alternateTimes);
 	        	}
 	        	else {
 	        		JOptionPane.showMessageDialog(frame, "You must load a Courses file and a Rooms file to do this.");
